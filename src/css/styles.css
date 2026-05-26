@@ -1,0 +1,259 @@
+/* =========================================
+   1. VARIABILI GLOBALI E RESET
+   ========================================= */
+header { padding: 1rem; }
+
+html {
+  box-sizing: border-box;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/* =========================================
+   2. CLASSI DI UTILITÀ (I Mattoncini)
+   ========================================= */
+
+/* -- Layout (Flexbox) -- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-evenly { justify-content: space-evenly; }
+.justify-end { justify-content: flex-end; }
+
+/* -- Spaziature e Bordi -- */
+.gap-s { gap: 0.4rem; }
+.gap-m { gap: 1rem; }
+.gap-l { gap: 2rem; }
+.gap-xl { gap: 4rem; }
+.mb-s { margin-bottom: 0.5rem; }
+.mb-m { margin-bottom: 1rem; }
+.my-m { margin: 1rem 0; }
+.mx-auto { margin: 0 auto; }
+.ml-auto { margin-left: auto; }
+.border-none { border: none; }
+
+/* -- Dimensioni -- */
+.w-full { width: 100%; }
+.w-95 { width: 95%; }
+.w-60 { width: 60%; }
+.h-full { height: 100%; }
+
+/* -- Tipografia e Colori -- */
+.text-center { text-align: center; }
+.text-italic { font-style: italic; }
+.text-primary { color: var(--var1-color); }
+.bg-primary { background-color: var(--var1-color); }
+.bg-accent { background-color: var(--act-color); }
+
+/* =========================================
+   3. COMPONENTI SPECIFICI
+   ========================================= 
+*/
+
+#a {
+  flex: 70%;
+}
+
+.flex-icon {
+  flex: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+/* -- Moduli e Input -- */
+#login-form {
+  height: 20rem;
+  width: 60%;
+  border-bottom: 2px solid var(--var2-color);
+}
+
+form label {
+  align-self: flex-start;
+}
+
+legend {
+  color: var(--var1-color);
+  font-size: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+}
+.input-md {
+  height: 1rem;
+  padding: 1.3rem 0.4rem;
+}
+.input-lg {
+  height: 3rem;
+  padding: 1.3rem 0.4rem;
+}
+
+/* -- Bottoni e Link -- */
+.btn {
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  cursor: pointer; /* Aggiunto per UX */
+}
+
+.a-btn {
+  text-decoration: none;
+  color: white;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.icon-btn {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+/* -- Immagini e Loghi -- */
+.logo-small { height: 4rem; }
+.logo-medium { height: 7rem; margin: 0 auto; }
+.icon { height: 2.5rem; }
+.big { height: 6rem; }
+
+.profile-image {
+  height: 2.5rem;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.image-post {
+  height: 37.5vh;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* -- Post e Commenti -- */
+.post {
+  padding: 0.5rem;
+  width: 95%;
+  border-radius: 5px;
+  box-shadow: 0 5px 1px rgba(0,0,0,0.12), 0 5px 2px rgba(0,0,0,0.24);
+  background-color: #eaead0;
+}
+
+.comments {
+  width: 95%;
+}
+
+.post-time {
+  margin-left: auto;
+  font-style: italic;
+}
+
+.comment {
+  border: 3px solid var(--var2-color);
+  padding: 0.6rem;
+  border-radius: 10px;
+}
+
+/* -- Header e Footer -- */
+.header-nav {
+  position: sticky;
+  background-color: var(--bg-color);
+  top: 0;
+  display: flex; /* Ripristinato per non forzarti a cambiare HTML qui */
+  align-items: center;
+  padding: 0.2rem;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex; /* Ripristinato */
+  height: 5%;
+  background-color: var(--ntf-color);
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  font-style: italic;
+}
+
+.nickname {
+  margin: 0 auto;
+  flex: 0 0 50%;
+}
+
+.counter {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-header {
+  padding: 0 1rem;
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.6rem;
+  border-bottom: 3px solid var(--var2-color);
+}
+
+.profile-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2rem;
+}
+
+.user-recipe {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profile-recipe-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.recipe-name {
+  text-align: center;
+  font-size: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   4. MEDIA QUERIES E RESPONSIVE
+   ========================================= */
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .container { max-width: 640px; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 1024px; }
+}

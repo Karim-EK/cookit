@@ -1,0 +1,115 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookit-SingUp</title>
+</head>
+<body>
+    <header>
+      <a href="/index.html">
+        <svg class="logo-medium"
+          viewBox="0 0 500 200"
+          version="1.1"
+          id="svg_cookit_logo"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:svg="http://www.w3.org/2000/svg">
+          <defs
+            id="defs1">
+            <linearGradient
+              id="fireGradient"
+              x1="0%"
+              y1="100%"
+              x2="0%"
+              y2="0%">
+              <stop
+                offset="0%"
+                style="stop-color:#E65100;stop-opacity:1"
+                id="stop1" />
+              <stop
+                offset="100%"
+                style="stop-color:#FFCA28;stop-opacity:1"
+                id="stop2" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Icona del Logo (Pentola e Fuoco) -->
+          <g
+            id="icon_group"
+            transform="translate(20,20)">
+            <!-- Cerchio Esterno -->
+            <circle
+              cx="80"
+              cy="80"
+              r="75"
+              style="fill:none;stroke:url(#fireGradient);stroke-width:10"
+              id="circle_border" />
+            <!-- Pentola -->
+            <path
+              d="M 40,90 C 40,120 120,120 120,90 L 115,90 L 115,70 L 125,70 L 125,60 L 35,60 L 35,70 L 45,70 L 45,90 Z"
+              style="fill:url(#fireGradient)"
+              id="pot" />
+            <!-- Fiamma -->
+            <path
+              d="M 80,10 C 65,30 60,45 70,60 C 75,70 85,70 90,60 C 100,45 95,30 80,10 Z M 72,35 C 68,45 70,52 75,58 C 78,61 82,61 85,58 C 90,52 92,45 88,35 C 85,25 75,25 72,35 Z"
+              style="fill:url(#fireGradient)"
+              id="flame" />
+          </g>
+          
+          <!-- Testo "CookIt" -->
+          <g
+            id="text_group"
+            transform="translate(190, 80)">
+            <text
+              x="0"
+              y="50"
+              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:100px;line-height:1;font-family:sans-serif;fill:#2E7D32"
+              id="text_cookit">
+              <tspan
+                x="0"
+                y="50"
+                id="tspan_cookit">Cookit</tspan>
+            </text>
+            
+            <!-- Stellina sopra la 't' -->
+            <path
+              id="sparkle"
+              d="M 270,-15 L 273,-5 L 283,-2 L 273,1 L 270,11 L 267,1 L 257,-2 L 267,-5 Z"
+              style="fill:#FFCA28;stroke:none" />
+          </g>
+          
+        </svg>
+      </a>
+    </header>
+
+    <main class="">
+        <form id="recepi-form" action="POST">
+            <label for="recepi-name">Nome Ricetta:</label>
+            <input id="recepi-name" class="recepi-upld-name" name="recepi-name" type="text" placeholder="Es: Tagliatelle al Ragù">
+
+            <label for="search">Cerca Ingrediente:</label>
+            <p>Non è necessario specificare il sale</p>
+            <input id="search" type="text" placeholder="Es: aglio, pomodoro, ecc...">
+            <ul id="search-results" style="display: none; border: 1px solid #ccc;"></ul>
+            
+            <p>Ingredienti aggiunti:</p>
+            <ul id="ingredients-list"></ul>
+
+            <div id="db-list"></div>
+
+            <label for="recepi-description">Descrivi la preparazione della tua ricetta</label>
+            <p>Ricorda che dovrai spiegare come usarai ciascun <span>ingrediente</span> che hai utilizzato</p>
+            <textarea name="recepi-descrpition" id="recepi-description"></textarea>
+            <div id="missing-ing-container"></div>
+            <p>Condividi una foto del tuo piatto!</p>
+            <!-- inserimento e gestione immagine -->
+            <button type="submit">Carica Ricetta</button>
+          </form>
+    </main>
+
+    <footer>
+      <p>Developed by Karim El Kholy</p>
+    </footer>
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

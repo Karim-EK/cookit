@@ -1,0 +1,33 @@
+:root {
+  --bg-color: #F5F5DC;
+  --txt-color: #424242;
+  --act-color:  #E65100;
+  --ntf-color: #FFCA28;
+  --var1-color: #2E7D32;
+  --var2-color: #81C784;
+}
+
+
+
+* {
+  line-height: calc(1em + 0.5rem);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+}
+
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+fieldset {
+    padding: 0;
+}
