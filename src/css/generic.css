@@ -3,8 +3,25 @@
   --txt-color: #424242;
   --act-color:  #E65100;
   --ntf-color: #FFCA28;
-  --var1-color: #2E7D32;
-  --var2-color: #81C784;
+  --green-drk: #2E7D32;
+  --green-lth: #81C784;
+  --shadow-color: rgb(140, 130, 110);
+  --shadow-accent: rgb(230, 81, 0);
+
+  /* Base RGB per le ombre (Derivato da #424242) */
+  --shadow-base: 66, 66, 66;
+
+  /* Sistema di Ombre Funzionali (Layered Shadows) */
+  --shadow-sm: 0 1px 2px rgba(var(--shadow-base), 0.05), 0 1px 3px rgba(var(--shadow-base), 0.08);
+  --shadow-md: 0 4px 6px rgba(var(--shadow-base), 0.05), 0 5px 15px rgba(var(--shadow-base), 0.08);
+  --shadow-lg: 0 10px 15px rgba(var(--shadow-base), 0.08), 0 15px 35px rgba(var(--shadow-base), 0.12);
+  
+  /* Ombra interna */
+  --shadow-inner: inset 0 2px 4px rgba(var(--shadow-base), 0.1);
+  
+  /* Glow colorati per le interazioni (usano i tuoi colori accent e primary) */
+  --glow-act: 0 0 12px rgba(230, 81, 0, 0.4); /* rgba di #E65100 */
+  --glow-primary: 0 0 12px rgba(46, 125, 50, 0.4); /* rgba di #2E7D32 */
 }
 
 
