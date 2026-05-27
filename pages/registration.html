@@ -1,116 +1,86 @@
 <html lang="it">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookit-SingUp</title>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookit-SingUp</title>
 </head>
+
 <body>
-    <header>
-      <a href="/index.html">
-        <svg class="logo-medium"
-          viewBox="0 0 500 200"
-          version="1.1"
-          id="svg_cookit_logo"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:svg="http://www.w3.org/2000/svg">
-          <defs
-            id="defs1">
-            <linearGradient
-              id="fireGradient"
-              x1="0%"
-              y1="100%"
-              x2="0%"
-              y2="0%">
-              <stop
-                offset="0%"
-                style="stop-color:#E65100;stop-opacity:1"
-                id="stop1" />
-              <stop
-                offset="100%"
-                style="stop-color:#FFCA28;stop-opacity:1"
-                id="stop2" />
-            </linearGradient>
-          </defs>
-          
-          <!-- Icona del Logo (Pentola e Fuoco) -->
-          <g
-            id="icon_group"
-            transform="translate(20,20)">
-            <!-- Cerchio Esterno -->
-            <circle
-              cx="80"
-              cy="80"
-              r="75"
-              style="fill:none;stroke:url(#fireGradient);stroke-width:10"
-              id="circle_border" />
-            <!-- Pentola -->
-            <path
-              d="M 40,90 C 40,120 120,120 120,90 L 115,90 L 115,70 L 125,70 L 125,60 L 35,60 L 35,70 L 45,70 L 45,90 Z"
-              style="fill:url(#fireGradient)"
-              id="pot" />
-            <!-- Fiamma -->
-            <path
-              d="M 80,10 C 65,30 60,45 70,60 C 75,70 85,70 90,60 C 100,45 95,30 80,10 Z M 72,35 C 68,45 70,52 75,58 C 78,61 82,61 85,58 C 90,52 92,45 88,35 C 85,25 75,25 72,35 Z"
-              style="fill:url(#fireGradient)"
-              id="flame" />
-          </g>
-          
-          <!-- Testo "CookIt" -->
-          <g
-            id="text_group"
-            transform="translate(190, 80)">
-            <text
-              x="0"
-              y="50"
-              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:100px;line-height:1;font-family:sans-serif;fill:#2E7D32"
-              id="text_cookit">
-              <tspan
-                x="0"
-                y="50"
-                id="tspan_cookit">Cookit</tspan>
-            </text>
-            
-            <!-- Stellina sopra la 't' -->
-            <path
-              id="sparkle"
-              d="M 270,-15 L 273,-5 L 283,-2 L 273,1 L 270,11 L 267,1 L 257,-2 L 267,-5 Z"
-              style="fill:#FFCA28;stroke:none" />
-          </g>
-          
-        </svg>
-      </a>
-    </header>
+  <header>
+    <a href="/index.html">
+      <svg class="h-logo-md m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo"
+        xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+        <defs id="defs1">
+          <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
+            <stop offset="100%" style="stop-color:#FFCA28;stop-opacity:1" id="stop2" />
+          </linearGradient>
+        </defs>
 
-    <main class="flex flex-col items-center">
-      <div class="container flex flex-col">
-        <h1>Benvenuto in Cucina </h1>
-        <p class="text-center">Abbiamo bisogno di qualche informazione prima di metterti ai fornelli!</p>
-      </div>
-      <form action="POST" class="flex flex-col items-center justify-evenly h-full w-60">
-        <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-            <legend>Su di te:</legend>
-            <label for="name">Nome:</label>
-            <input class="input input-md" type="text" required placeholder="Mario" id="name" name="name">
-            <label for="surname">Cognome:</label>
-            <input class="input input-md" type="text" required placeholder="Rossi" id="surname" name="surname">
-            <label for="birth">Data di nascita:</label>
-            <input class="input input-md" type="date" required id="birth" name="birth">
-        </fieldset>
-        <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-            <legend>Credenziali:</legend>
-            <label for="email">Email:</label>
-            <input class="input input-md" type="email" required id="email" name="email">
-            <label for="email">Password:</label>
-            <input class="input input-md" type="password" required id="password" name="password">
-        </fieldset>
-        <input class="btn bg-accent" type="submit" value="Registrati Ora">
-      </form>
-    </main>
+        <!-- Icona del Logo (Pentola e Fuoco) -->
+        <g id="icon_group" transform="translate(20,20)">
+          <!-- Cerchio Esterno -->
+          <circle cx="80" cy="80" r="75" style="fill:none;stroke:url(#fireGradient);stroke-width:10"
+            id="circle_border" />
+          <!-- Pentola -->
+          <path
+            d="M 40,90 C 40,120 120,120 120,90 L 115,90 L 115,70 L 125,70 L 125,60 L 35,60 L 35,70 L 45,70 L 45,90 Z"
+            style="fill:url(#fireGradient)" id="pot" />
+          <!-- Fiamma -->
+          <path
+            d="M 80,10 C 65,30 60,45 70,60 C 75,70 85,70 90,60 C 100,45 95,30 80,10 Z M 72,35 C 68,45 70,52 75,58 C 78,61 82,61 85,58 C 90,52 92,45 88,35 C 85,25 75,25 72,35 Z"
+            style="fill:url(#fireGradient)" id="flame" />
+        </g>
 
-    <footer>
-      <p>Developed by Karim El Kholy</p>
-    </footer>
-    <script type="module" src="/src/js/main.js"></script>
+        <!-- Testo "CookIt" -->
+        <g id="text_group" transform="translate(190, 80)">
+          <text x="0" y="50"
+            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:100px;line-height:1;font-family:sans-serif;fill:#2E7D32"
+            id="text_cookit">
+            <tspan x="0" y="50" id="tspan_cookit">Cookit</tspan>
+          </text>
+
+          <!-- Stellina sopra la 't' -->
+          <path id="sparkle" d="M 270,-15 L 273,-5 L 283,-2 L 273,1 L 270,11 L 267,1 L 257,-2 L 267,-5 Z"
+            style="fill:#FFCA28;stroke:none" />
+        </g>
+
+      </svg>
+    </a>
+  </header>
+
+  <main class="flex flex-col items-center">
+    <div class="flex flex-col p-s gap-m mb-s">
+      <h1 class="text-center">Benvenuto in Cucina </h1>
+      <p class="text-center">Abbiamo bisogno di qualche informazione prima di metterti ai fornelli!</p>
+    </div>
+    <form action="POST" class="flex flex-col items-center justify-between h-full w-70">
+      <fieldset class="flex flex-col gap-s w-full border-none mb-s">
+        <legend class="text-md text-primary mb-s">Su di te:</legend>
+        <label class="self-start" for="name">Nome:</label>
+        <input class="input-base input-md" type="text" required placeholder="Mario" id="name" name="name">
+        <label class="self-start" for="surname">Cognome:</label>
+        <input class="input-base input-md" type="text" required placeholder="Rossi" id="surname" name="surname">
+        <label class="self-start" for="birth">Data di nascita:</label>
+        <input class="input-base input-md" type="date" required id="birth" name="birth">
+      </fieldset>
+      <fieldset class="flex flex-col gap-s w-full border-none mb-s">
+        <legend class="text-md text-primary mb-s">Credenziali:</legend>
+        <label class="self-start" for="email">Email:</label>
+        <input class="input-base input-md" type="email" required id="email" name="email">
+        <label class="self-start" for="email">Password:</label>
+        <input class="input-base input-md" type="password" required id="password" name="password">
+      </fieldset>
+      <input class="btn-base text-white text-lg p-m mb-l bg-accent" type="submit" value="Registrati Ora">
+    </form>
+  </main>
+
+  <footer class="flex h-5 bg-notify justify-end items-center p-s px-m text-italic">
+    <p>Developed by Karim El Kholy</p>
+  </footer>
+  <script type="module" src="/src/js/main.js"></script>
 </body>
+
 </html>
