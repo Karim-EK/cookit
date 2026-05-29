@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookit-SingUp</title>
 </head>
@@ -65,14 +67,29 @@
       <p>Ingredienti aggiunti:</p>
       <ul id="ingredients-list"></ul>
 
-      <div id="db-list"></div>
-
       <label for="recepi-description">Descrivi la preparazione della tua ricetta</label>
       <p>Ricorda che dovrai spiegare come usarai ciascun <span>ingrediente</span> che hai utilizzato</p>
       <textarea name="recepi-descrpition" id="recepi-description"></textarea>
       <div id="missing-ing-container"></div>
       <p>Condividi una foto del tuo piatto!</p>
-      <!-- inserimento e gestione immagine -->
+     
+      
+      <label for="image-upload">Scegli la foto della ricetta:</label>
+      <input type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
+
+      <div id="crop-ui" style="display: none;">
+          <p>Trascina per posizionare il ritaglio (Proporzione 4:3)</p>
+          
+          <div>
+              <img id="image-to-crop" src="" style="display: block; max-width: 100%;">
+          </div>
+          
+          <button type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+      </div>
+
+      <img id="final-preview" style="display: none;">
+      <input type="hidden" name="cropped_image_data" id="cropped_image_data">
+
       <button type="submit">Carica Ricetta</button>
     </form>
   </main>

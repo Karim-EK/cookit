@@ -1,14 +1,16 @@
 import '../css/normalize.css'
 import '../css/generic.css'
 import '../css/styles.css'
+import './cropper.js'
 
+const API_TIMER = 800;
 let selectedIngredients = [];
 let apiTimer;
+let ingredientsCounter = 0;
 
 const searchInput = document.getElementById("search");
 const searchResults = document.getElementById("search-results");
 const ingredientsList = document.getElementById("ingredients-list");
-const hiddenInputsContainer = document.getElementById("db-list");
 const recepiDescription = document.getElementById("recepi-description");
 const recepiForm = document.getElementById("recepi-form");
 const missingIngContainer = document.getElementById("missing-ing-container");
@@ -21,7 +23,7 @@ searchInput.addEventListener("input", (e) => {
         searchResults.style.display ="none";
         return;
     }
-    apiTimer = setTimeout(() => findIngredient(query), 1000);
+    apiTimer = setTimeout(() => findIngredient(query), API_TIMER);
 });
     
 async function findIngredient(string) {
@@ -63,21 +65,53 @@ function addIngredient(ingName) {
         selectedIngredients.push(ingName);
         const li = document.createElement("li");
         li.textContent = ingName;
-        ingredientsList.appendChild(li)
+        const input = document.createElement("input");
+        input.type = "number";
+        input.name = `ingredients[${ingredientsCounter}][qty]`;
+        const select = document.createElement("select");
+        select.name = `ingredients[${ingredientsCounter}][unit]`;
+        const optG = document.createElement("option");
+        optG.textContent = "g";
+        optG.value = "g";
+        const optMl = document.createElement("option");
+        optMl.textContent = "ml";
+        optMl.value = "ml";
+        const optPz = document.createElement("option");
+        optPz.textContent = "pezzi";
+        optPz.value = "pcs";
         const hiddenInput = document.createElement("input");
         hiddenInput.type = "hidden";
-        hiddenInput.name = "ingredients[]";
+        hiddenInput.name = `ingredients[${ingredientsCounter}][name]`;
         hiddenInput.value = ingName;
-        hiddenInputsContainer.appendChild(hiddenInput);
+        const btn = document.createElement("button");
+        btn.textContent = "elimina";
+        btn.addEventListener("click", () => removeIngredient(li, ingName));
+
+        select.appendChild(optG);
+        select.appendChild(optMl);
+        select.appendChild(optPz);
+        
+        li.appendChild(input);
+        li.appendChild(select);
+        li.appendChild(hiddenInput);
+        li.appendChild(btn);
+
+        ingredientsList.appendChild(li);
+
+        ingredientsCounter ++;
     }
     searchInput.value = "";
     searchResults.style.display = "none";
 }
 
+function removeIngredient(element, ingName) {
+    element.remove()
+    selectedIngredients = selectedIngredients.filter(ingr => ingr !== ingName);
+}
+
 recepiForm.addEventListener("submit", (e) => checkForIngredients(e));
 
 function checkForIngredients(event) {
-    debugger;
     missingIngContainer.innerHTML = "";
     const recepiText = recepiDescription.value.toLowerCase();
     let missingIngredients = [];
@@ -93,7 +127,7 @@ function checkForIngredients(event) {
         missingIngContainer.appendChild(p);
         missingIngredients.forEach(missingOne => {
             const span = document.createElement("span");
-            span.textContent = " "+ missingOne;
+            span.textContent = " "+ missingOne + ";";
             span.style.color = "red";
             missingIngContainer.appendChild(span);
         })
