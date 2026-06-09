@@ -6,8 +6,8 @@ let ingredientsCounter = 0;
 const searchInput = document.getElementById("search");
 const searchResults = document.getElementById("search-results");
 const ingredientsList = document.getElementById("ingredients-list");
-const recepiDescription = document.getElementById("recepi-description");
-const recepiForm = document.getElementById("recepi-form");
+const recipeDescription = document.getElementById("recipe-description");
+const recipeForm = document.getElementById("recipe-form");
 const missingIngContainer = document.getElementById("missing-ing-container");
 
 searchInput.addEventListener("input", (e) => {
@@ -104,14 +104,14 @@ function removeIngredient(element, ingName) {
     selectedIngredients = selectedIngredients.filter(ingr => ingr !== ingName);
 }
 
-recepiForm.addEventListener("submit", (e) => checkForIngredients(e));
+recipeForm.addEventListener("submit", (e) => checkForIngredients(e));
 
 function checkForIngredients(event) {
     missingIngContainer.innerHTML = "";
-    const recepiText = recepiDescription.value.toLowerCase();
+    const recipeText = recipeDescription.value.toLowerCase();
     let missingIngredients = [];
     selectedIngredients.forEach(ingredient => {
-        if (!recepiText.includes(ingredient.toLowerCase())) {
+        if (!recipeText.includes(ingredient.toLowerCase())) {
             missingIngredients.push(ingredient);
         }
     })

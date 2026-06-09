@@ -1,21 +1,23 @@
-const logingForm = document.getElementById("login");
-if (logingForm) {
-    logingForm.addEventListener("submit", async function(event) {
+const recipeForm = document.getElementById("recipe-form");
+if (recipeForm) {
+    debugger;
+    recipeForm.addEventListener("submit", async function(event) {
         event.preventDefault();
         const formData = new FormData(this);
         try {
-            const response = await fetch("/Cookit/api/login.php", {
+            const response = await fetch("/Cookit/api/recipe_upload.php", {
                 method: "POST",
                 body: formData
             });
             const data = await response.json();
     
             if(data.success) {
-                console.log("Autenticato con successo");
+                console.log("Ricetta pubblicata con successo");
+                //TODO: carica pagina del post
                 window.location.href = "/Cookit/pages/home.html"; 
             } else {
-                console.log("Errore di autenticazione:", data.messaggio);
-                alert(data.messaggio); // O inserisci il testo in un <span> rosso nel form
+                console.log("Errore", data.messaggio);
+                alert(data.messaggio);
             }
     
         } catch (error) {

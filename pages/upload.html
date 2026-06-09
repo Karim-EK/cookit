@@ -57,11 +57,17 @@
   </header>
 
   <main class="">
-    <form id="recepi-form" action="POST">
-      <label for="recepi-name">Nome Ricetta:</label>
-      <input id="recepi-name" class="recepi-upld-name" name="recepi-name" type="text"
-        placeholder="Es: Tagliatelle al Ragù">
-
+    <form id="recipe-form">
+      <label for="recipe-name">Nome Ricetta:</label>
+      <input id="recipe-name" class="recipe-upld-name" name="recipe-name" type="text" placeholder="Es: Tagliatelle al Ragù">
+      <label for="difficulty">Quanto ritieni complicata la preparazione della ricetta?</label>
+      <select name="difficulty" id="difficulty">
+        <option value="facile">facile</option>
+        <option value="medio">medio</option>
+        <option value="difficile">difficile</option>
+      </select>
+      <label for="prep-time">Quanto tempo è necessiario per preparare la tua ricetta?</label>
+      <input type="number" id="prep-time" name="prep-time" placeholder="60"> <span>minuti</span>
       <label for="search">Cerca Ingrediente:</label>
       <p>Non è necessario specificare il sale</p>
       <input id="search" type="text" placeholder="Es: aglio, pomodoro, ecc...">
@@ -70,9 +76,9 @@
       <p>Ingredienti aggiunti:</p>
       <ul id="ingredients-list"></ul>
 
-      <label for="recepi-description">Descrivi la preparazione della tua ricetta</label>
+      <label for="recipe-description">Descrivi la preparazione della tua ricetta</label>
       <p>Ricorda che dovrai spiegare come usarai ciascun <span>ingrediente</span> che hai utilizzato</p>
-      <textarea name="recepi-descrpition" id="recepi-description"></textarea>
+      <textarea name="recipe-description" id="recipe-description"></textarea>
       <div id="missing-ing-container"></div>
       <p>Condividi una foto del tuo piatto!</p>
      
