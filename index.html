@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
+  <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
+  <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
   <title>Cookit Login</title>
 </head>
 
 <body>
   <header>
-    <a href="/index.html">
+    <a href="/Cookit/index.html">
       <svg class="h-logo-md m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo"
         xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
         <defs id="defs1">
@@ -54,7 +57,7 @@
 
   <main class="flex flex-col items-center justify-evenly">
     <h1>Bentornato Chef </h1>
-    <form action="POST" class="flex flex-col items-center gap-l w-70 border-bottom-thin">
+    <form id="login"class="flex flex-col items-center gap-l w-70 border-bottom-thin">
       <label class="text-md" for="email">Email:</label>
       <input class="input-base input-lg" id="email" name="email" type="email" required placeholder="example@email.com">
       <label class="text-md" for="pw">Password:</label>
@@ -68,7 +71,7 @@
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m text-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/src/js/main.js"></script>
+  <script type="module" src="/Cookit/src/js/main.js"></script>
 </body>
 
 </html>

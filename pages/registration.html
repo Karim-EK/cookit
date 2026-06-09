@@ -5,11 +5,14 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookit-SingUp</title>
+  <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
+  <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
+  <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
 </head>
 
 <body>
   <header>
-    <a href="/index.html">
+    <a href="/Cookit/index.html">
       <svg class="h-logo-md m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo"
         xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
         <defs id="defs1">
@@ -56,15 +59,17 @@
       <h1 class="text-center">Benvenuto in Cucina </h1>
       <p class="text-center">Abbiamo bisogno di qualche informazione prima di metterti ai fornelli!</p>
     </div>
-    <form action="POST" class="flex flex-col items-center justify-between h-full w-70">
+    <form id="signup-form" class="flex flex-col items-center justify-between h-full w-70">
       <fieldset class="flex flex-col gap-s w-full border-none mb-s">
         <legend class="text-md text-primary mb-s">Su di te:</legend>
         <label class="self-start" for="name">Nome:</label>
         <input class="input-base input-md" type="text" required placeholder="Mario" id="name" name="name">
         <label class="self-start" for="surname">Cognome:</label>
         <input class="input-base input-md" type="text" required placeholder="Rossi" id="surname" name="surname">
-        <label class="self-start" for="birth">Data di nascita:</label>
-        <input class="input-base input-md" type="date" required id="birth" name="birth">
+        <label class="self-start" for="username">Username</label>
+        <input class="input-base input-md" type="text" required placeholder="ChefGuido02" id="username" name="username">
+        <label class="self-start" for="birth-date">Data di nascita:</label>
+        <input class="input-base input-md" type="date" required id="birth-date" name="birth-date">
       </fieldset>
       <fieldset class="flex flex-col gap-s w-full border-none mb-s">
         <legend class="text-md text-primary mb-s">Credenziali:</legend>
@@ -73,14 +78,14 @@
         <label class="self-start" for="email">Password:</label>
         <input class="input-base input-md" type="password" required id="password" name="password">
       </fieldset>
-      <input class="btn-base text-white text-lg p-m mb-l bg-accent" type="submit" value="Registrati Ora">
+      <input class="btn-base text-white text-lg p-m my-m bg-accent" type="submit" value="Registrati Ora">
     </form>
   </main>
 
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m text-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/src/js/main.js"></script>
+  <script type="module" src="/Cookit/src/js/main.js"></script>
 </body>
 
 </html>

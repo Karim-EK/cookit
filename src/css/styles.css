@@ -49,6 +49,7 @@ header { padding: 1rem; }
 .mb-m { margin-bottom: 1rem; }
 .mb-l { margin-bottom: 2rem; }
 .my-m { margin: 1rem 0; }
+.my-l { margin: 2rem 0; }
 
 .w-full { width: 100%; }
 .w-95 { width: 95%; }
