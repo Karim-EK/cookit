@@ -1,17 +1,15 @@
 <?php
+/**
+ * Uploads Recipe datas to DB
+ */
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(["success" => false, "messaggio" => "Devi effettuare il login per pubblicare una ricetta."]);
-    exit;
-}
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(["success" => false, "messaggio" => "Metodo non consentito."]);
-    exit;
-}
+require_once "./config/api_helpers.php";
+
+verify_user_logged_in();
+verify_request_method("POST");
+
 $utente_id = $_SESSION['user_id'];
 $nome = trim($_POST['recipe-name'] ?? '');
 $difficolta = $_POST['difficulty'] ?? '';
@@ -21,12 +19,10 @@ $ingredienti_raw = $_POST['ingredients'] ?? [];
 $immagine_b64 = $_POST['cropped_image_data'] ?? '';
 
 if (empty($nome) || empty($difficolta) || !$tempo || empty($preparazione)) {
-    echo json_encode(["success" => false, "messaggio" => "Compila tutti i campi di testo correttamente."]);
-    exit;
-}
-if (empty($ingredienti_raw) || !is_array($ingredienti_raw)) {
-    echo json_encode(["success" => false, "messaggio" => "Devi inserire almeno un ingrediente."]);
-    exit;
+    send_json_response(false, "Compila tutti i campi di testo correttamente.", null, 422);
+    }
+    if (empty($ingredienti_raw) || !is_array($ingredienti_raw)) {
+    send_json_response(false, "Devi inserire almeno un ingrediente.", null, 422);
 }
 
 // 6. La Magia di array_values()
@@ -55,7 +51,6 @@ try {
     ]);
 
 } catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "messaggio" => "Errore del server: " . $e->getMessage()]);
+    send_json_response(false, "Errore del server: " . $e->getMessage(), null, 500);
 }
 ?>

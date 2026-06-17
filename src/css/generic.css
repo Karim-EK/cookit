@@ -48,3 +48,8 @@ h1 {
 fieldset {
     padding: 0;
 }
+
+button {
+  background-color: inherit;
+  border: none;
+}

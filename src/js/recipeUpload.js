@@ -1,3 +1,6 @@
+/**
+ * Send Recipe data tu the DB
+ */
 const recipeForm = document.getElementById("recipe-form");
 if (recipeForm) {
     debugger;

@@ -2,10 +2,9 @@
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["success" => false, "messaggio" => "Metodo non consentito."]);
-    exit;
-}
+require_once "./config/api_helpers.php";
+
+verify_request_method("POST");
 
 $name = trim($_POST["name"] ?? "");
 $surname = trim($_POST["surname"] ?? "");
@@ -18,8 +17,7 @@ $array_data = [$name, $surname, $birth_date, $username, $email, $password];
 
 foreach ($array_data as $input) {
     if(empty($input)) {
-        echo json_encode(["success" => false, "message" => "Compila tutti i campi"]);
-        exit;
+        send_json_response(false, "Compila tutti i campi", null, 422);
     }
 }
 try {
@@ -32,12 +30,10 @@ try {
     $existing = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($existing) {
         if ($existing['Username'] === $username) {
-            echo json_encode(["success" => false, "messaggio" => "Username già in uso."]);
-            exit;
+            send_json_response(false, "Username già in uso.", null, 422);
         }
         if ($existing['Email'] === $email) {
-            echo json_encode(["success" => false, "messaggio" => "Questa email è già registrata."]);
-            exit;
+            send_json_response(false, "Questa email è già registrata.", null, 422);
         }
     }
 
@@ -53,9 +49,8 @@ try {
         "email" => $email,
         "password" => $hashed_password
     ]);
-    echo json_encode(["success" => true, "messaggio" => "Registrazione completata con successo!"]);
+    send_json_response(true, "Registrazione completata con successo!", null);
 } catch(PDOException $e) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "messaggio" => "Errore del server: " . $e->getMessage()]);
+    send_json_response(false, "Errore del server: " . $e->getMessage(), null, 500);
 }
 ?>

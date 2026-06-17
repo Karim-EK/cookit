@@ -1,13 +1,16 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
 require_once "./config/db_connect.php";
-
+require_once "./config/api_helpers.php";
 session_start();
+
+verify_request_method("GET");
+verify_user_logged_in();
 
 $target_id = $_GET['id'] ?? $_SESSION['user_id'] ?? null;
 
 if (!$target_id) {
-    http_response_code(401); // 401 Unauthorized
+    http_response_code(401);
     echo json_encode(["errore" => true, "messaggio" => "Utente non loggato o ID non fornito."]);
     exit;
 }
@@ -39,18 +42,12 @@ try {
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$data) {
-        http_response_code(404); // 404 Not Found
-        echo json_encode(["errore" => true, "messaggio" => "Utente non trovato."]);
-        exit;
+        send_json_response(false, "Utente non trovato.", null, 404);
     }
 
-    echo json_encode($data);
+    //TODO: MANDA RISPOSTA
 
 } catch(PDOException $e) {
-    http_response_code(500);
-    echo json_encode([
-        "errore" => true, 
-        "messaggio" => "Errore durante recupero dati: " . $e -> getMessage()
-    ]);
+    send_json_response(false, "Errore durante recupero dati: ", null, 500);
 }
 ?>

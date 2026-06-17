@@ -1,13 +1,12 @@
 async function loadData(p) {
     const urlParams = new URLSearchParams(window.location.search);
     const targetUserId = urlParams.get('id');
-    let apiUrl = "/Cookit/api/get_user_info.php";
     if (targetUserId) {
         apiUrl += `?id=${targetUserId}`;
     }
 
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch("/Cookit/api/get_user_info.php");
         const data = await response.json();        
 
         // Qui in futuro inietterai i dati di 'data' dentro l'elemento 'p' (nameSurname)

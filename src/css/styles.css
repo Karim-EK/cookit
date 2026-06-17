@@ -13,6 +13,7 @@ header { padding: 1rem; }
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
+.content-evenly {align-content: space-evenly;}
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
@@ -22,6 +23,7 @@ header { padding: 1rem; }
 .flex-10 { flex: 10%; }
 .flex-50 { flex: 0 0 50%; }
 .self-start {align-self: flex-start;}
+.self-end {align-self: flex-end;}
 
 .grid { display: grid; }
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
@@ -38,7 +40,9 @@ header { padding: 1rem; }
 .p-l { padding: 1rem; }
 .px-m { padding-left: 1rem; padding-right: 1rem; }
 .py-s { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.pb-s { padding-bottom: 0.6rem; }
+.pt-s { padding-top: 0.5rem; }
+.pt-m { padding-top: 0.7rem; }
+.pb-s { padding-bottom: 0.5rem; }
 
 .m-0-auto { margin: 0 auto; }
 .ml-auto { margin-left: auto; }
@@ -62,20 +66,23 @@ header { padding: 1rem; }
 .min-w-0 { min-width: 0; }
 
 .h-icon { height: 2.5rem; }
-.h-logo-sm { height: 4rem; }
-.h-logo-md { height: 7rem; }
-.h-logo-lg { height: 6rem; }
+.h-logo-s { height: 4rem; }
+.h-logo-m { height: 7rem; }
+.h-logo-l { height: 6rem; }
 .h-post-img { height: 37.5vh; }
 
+.hidden { display: none;}
 .sticky-top { position: sticky; top: 0; }
+.ln-blck {display: inline-block;}
+.ln {display: inline;}
 .object-cover { object-fit: cover; }
 .aspect-4-3 { aspect-ratio: 4 / 3; }
 
-.text-center { text-align: center; }
-.text-italic { font-style: italic; }
-.text-sm { font-size: 0.7rem; }
-.text-md { font-size: 1.5rem; }
-.text-lg { font-size: 1.8rem; }
+.txt-center { text-align: center; }
+.txt-italic { font-style: italic; }
+.txt-s { font-size: 0.7rem; }
+.txt-m { font-size: 1.5rem; }
+.txt-l { font-size: 1.8rem; }
 .truncate { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 .bg-base { background-color: var(--bg-color); }
@@ -113,6 +120,23 @@ header { padding: 1rem; }
 /* =========================================
    3. COMPONENTI (Estetica Specifica)
    ========================================= */
+
+#togglable {
+  position: absolute;
+  top: 8vh;
+  right: 10vw;
+  overflow: auto;
+  background-color: aliceblue;
+  max-height: 60vh;
+  width: 80vw;
+}
+
+#searched-text{
+  border: none;
+  display: block;
+  width: 100%;
+}
+   
 .ui-card {
   border-radius: 0.313rem;
   box-shadow: 0 1px 2px rgba(var(--shadow-base), 0.05), 0 1px 3px rgba(var(--shadow-base), 0.08);
@@ -151,7 +175,7 @@ header { padding: 1rem; }
   transition: background-color 0.2s ease;
 }
 
-#icon-pan {
+#cook-btn {
   padding: 0.8rem 0.3rem 0 0.3rem;
 }
 .main-btn-icon:hover {
@@ -165,7 +189,12 @@ header { padding: 1rem; }
 }
 
 /* =========================================
-   4. RESPONSIVE
+   4. JS
+   ========================================= */
+.post {};
+
+/* =========================================
+   5. RESPONSIVE
    ========================================= */
 .container { margin: 0 auto; }
 @media (min-width: 640px) { .container { max-width: 640px; } }

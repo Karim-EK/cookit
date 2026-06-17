@@ -1,25 +1,27 @@
-const API_TIMER = 800;
-let selectedIngredients = [];
+const EXTERN_API_TIMER = 800;
 let apiTimer;
+let selectedIngredients = [];
 let ingredientsCounter = 0;
 
-const searchInput = document.getElementById("search");
+const searchInput = document.getElementById("search-ingr");
 const searchResults = document.getElementById("search-results");
 const ingredientsList = document.getElementById("ingredients-list");
 const recipeDescription = document.getElementById("recipe-description");
 const recipeForm = document.getElementById("recipe-form");
 const missingIngContainer = document.getElementById("missing-ing-container");
 
-searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    searchResults.innerHTML = '';
-    clearTimeout(apiTimer);
-    if (query.length < 2) {
-        searchResults.style.display ="none";
-        return;
-    }
-    apiTimer = setTimeout(() => findIngredient(query), API_TIMER);
-});
+if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        searchResults.innerHTML = '';
+        clearTimeout(apiTimer);
+        if (query.length < 2) {
+            searchResults.style.display ="none";
+            return;
+        }
+        apiTimer = setTimeout(() => findIngredient(query), EXTERN_API_TIMER);
+    });
+}
     
 async function findIngredient(string) {
     try {
@@ -104,27 +106,27 @@ function removeIngredient(element, ingName) {
     selectedIngredients = selectedIngredients.filter(ingr => ingr !== ingName);
 }
 
-recipeForm.addEventListener("submit", (e) => checkForIngredients(e));
-
-function checkForIngredients(event) {
+if(recipeForm) {
+    recipeForm.addEventListener("submit", (e) => {
     missingIngContainer.innerHTML = "";
-    const recipeText = recipeDescription.value.toLowerCase();
-    let missingIngredients = [];
-    selectedIngredients.forEach(ingredient => {
-        if (!recipeText.includes(ingredient.toLowerCase())) {
-            missingIngredients.push(ingredient);
-        }
-    })
-    if (missingIngredients.length > 0) {
-        event.preventDefault();
-        const p = document.createElement("p");
-        p.textContent = "Hai dimenticato questi ingredienti:";
-        missingIngContainer.appendChild(p);
-        missingIngredients.forEach(missingOne => {
-            const span = document.createElement("span");
-            span.textContent = " "+ missingOne + ";";
-            span.style.color = "red";
-            missingIngContainer.appendChild(span);
+        const recipeText = recipeDescription.value.toLowerCase();
+        let missingIngredients = [];
+        selectedIngredients.forEach(ingredient => {
+            if (!recipeText.includes(ingredient.toLowerCase())) {
+                missingIngredients.push(ingredient);
+            }
         })
-    }
+        if (missingIngredients.length > 0) {
+            event.preventDefault();
+            const p = document.createElement("p");
+            p.textContent = "Hai dimenticato questi ingredienti:";
+            missingIngContainer.appendChild(p);
+            missingIngredients.forEach(missingOne => {
+                const span = document.createElement("span");
+                span.textContent = " "+ missingOne + ";";
+                span.style.color = "red";
+                missingIngContainer.appendChild(span);
+            })
+        }
+    });
 }
