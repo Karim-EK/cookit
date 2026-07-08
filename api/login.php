@@ -2,14 +2,14 @@
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
-require_once "./config/api_herpers.php";
+require_once "./config/api_helpers.php";
 
 verify_request_method("POST");
 $email = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 
 if (empty($email) || empty($password)) {
-    echo json_encode(["success" => false, "messaggio" => "aCompila tutti i campi."]);
+    echo json_encode(["success" => false, "messagge" => "Compila tutti i campi."]);
     exit;
 }
 

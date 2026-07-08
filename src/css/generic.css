@@ -53,3 +53,8 @@ button {
   background-color: inherit;
   border: none;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

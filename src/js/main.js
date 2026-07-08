@@ -1,5 +1,4 @@
 import './sign_up.js'
-import './profile.js'
 import './login.js'
 import './recipeUpload.js'
 import './recipeForm.js'

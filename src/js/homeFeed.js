@@ -1,12 +1,27 @@
+import './homeSearch.js';
+import './homeButtons.js';
+
 /**
  * Shows most recents users's post in the feed
  */
 let postCache = [];
 const feedContainer = document.getElementById("feed-container");
 const sentinel = document.getElementById("feed-sentinel");
+const profileBtn = document.getElementById("profile-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const deleteProfileBtn = document.getElementById("delete-profile-btn");
+const newRecipeBtn = document.getElementById("recipe-upload-btn");
+newRecipeBtn.addEventListener("click", function() {location.href = "/Cookit/pages/upload.html"});
+let userId;
 
-if (feedContainer && sentinel) {
-    initFeed();
+if (feedContainer && sentinel && profileBtn) {
+    initFeed().then(() => {
+        if (userId) {
+            profileBtn.href = `/Cookit/pages/profile.html?id=${userId}`;
+        }
+    });
+    logoutBtn.addEventListener("click", () => logout());
+    deleteProfileBtn.addEventListener("click", () => deleteProfile());
 }
 
 async function initFeed() {
@@ -14,9 +29,11 @@ async function initFeed() {
         const response = await fetch("/Cookit/api/get_feed.php");
         const result = await response.json();
         if (!result.success) {
-            feedContainer.innerHTML = `<p class="error">${result.messaggio}</p>`;
+            console.error(result.message);
+            location.href = "/Cookit/index.php";
             return;
         }
+        userId = result.user_id;
         postCache = result.feed;
         if (postCache.length === 0) {
             feedContainer.innerHTML = "<p>Nessuna nuova ricetta da mostrarti al momento!</p>";
@@ -34,7 +51,6 @@ async function initFeed() {
         feedContainer.innerHTML = "<p class='error'>Errore di connessione al server.</p>";
     }
 }
-
 function renderNextPost() {
     if (postCache.length === 0) {
         console.log("Tutti i post della cache sono stati renderizzati.");
@@ -43,23 +59,43 @@ function renderNextPost() {
     }
     const post = postCache.shift();
     const postCard = document.createElement("div");
-    postCard.className = "shadow-sm p-s w-95 flex flex-col gap-s mb-m post";
-    //TODO: colore difficoltà immagine profilo
+    postCard.className = "shadow-sm p-s flex flex-col gap-s mb-m post";
+    postCard.style.minWidth = "100%";
+    const dishImg = post.Immagine || "/Cookit/src/assets/default-dish.png";
+    const avatarImg = post.Immagine_Profilo || "/Cookit/src/assets/default-avatar.png";
+    let difficultyColor;
+    let difficultyText;
+    switch (post.Difficolta) {
+        case "facile":
+            difficultyColor = "#81C784";
+            difficultyText = "Facile";
+            break;
+        case "medio":
+            difficultyColor = "#f9d66b";
+            difficultyText = "Media";
+            break
+        case "difficile":
+            difficultyColor = "#ff4444";
+            difficultyText = "Difficile";
+            break
+        default:
+            break;
+    }
     postCard.innerHTML = `
         <div class="flex items-center">
-            <img class="h-icon rounded-md object-cover mr-m" src="" alt="immagine profilo di ${post.autore}">
-            <p>${post.autore}</p>
+            <img class="h-icon rounded-md object-cover mr-m" src="${avatarImg}" alt="immagine profilo di ${post.autore}">
+            <a href = "/Cookit/pages/profile.html?id=${post.user_id}">${post.autore}</a>
             <p class="ml-auto txt-italic">${new Date(post.Data_Pubblicazione).toLocaleDateString()}</p>
         </div>
         <p>${post.titolo}</p>
-        <p style="background-color: #f9d66b" class="txt-m txt-center rounded-md">Difficoltà: ${post.Difficolta}</p>
+        <p style="background-color: ${difficultyColor}" class="txt-m txt-center rounded-md">Difficoltà: ${difficultyText}</p>
         
         <div class="dynamic-container">
-            <img class="h-post-img rounded-lg object-cover w-full" src="${post.Immagine}" alt="immagine di ${post.titolo} pubblicato da ${post.autore}">
+            <img data-content="image" class="h-post-img rounded-lg object-cover w-full" src="${dishImg}" alt="immagine di ${post.titolo} pubblicato da ${post.autore}">
         </div>
 
         <div class="flex justify-center gap-xl">
-            <button data-recipe-id="${post.post_id}" class="shadow-md main-btn-icon ingr-btn">
+            <button data-btn-type="ingr-btn" data-recipe-id="${post.post_id}" class="shadow-md main-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 
@@ -76,20 +112,8 @@ function renderNextPost() {
 
             </svg>
             </button>
-            <button data-recipe-id="${post.post_id}" class="shadow-md main-btn-icon cook-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48" fill="none"
-                stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M 17 46 H 83 V 54 C 83 66 17 66 17 54 Z" />
-                <path d="M 83 46 L 99 38" />
-
-                <g>
-                <path d="M 33 30 C 33 21 37 21 37 17 C 37 13 33 13 33 4" />
-                <path d="M 50 30 C 50 21 54 21 54 17 C 54 13 50 13 50 4" />
-                <path d="M 67 30 C 67 21 71 21 71 17 C 71 13 67 13 67 4" />
-                </g>
-            </svg>
-            </button>
-            <button data-recipe-id="${post.post_id}" class="shadow-md main-btn-icon prep-btn">
+           
+            <button data-btn-type="prep-btn" data-recipe-id="${post.post_id}" class="shadow-md main-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
 
@@ -116,8 +140,8 @@ function renderNextPost() {
         </div>
     `;
     feedContainer.appendChild(postCard);
+    document.querySelector('[data-content="image"]').addEventListener("click", function() {location.href = `/Cookit/pages/post.html?id=${post.post_id}`});
 }
-
 function setupInfiniteScroll() {
     const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
@@ -127,4 +151,43 @@ function setupInfiniteScroll() {
         rootMargin: "200px" 
     });
     observer.observe(sentinel);
+}
+async function logout() {
+    try {
+        const response = await fetch("/Cookit/api/logout.php", {
+            method: "POST"
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Ti sei disconnesso con successo");
+            window.location.href = "/Cookit/index.php";
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+async function deleteProfile() {
+    const confirmDeletion = confirm("Vuoi davvero eliminare definitivamente il tuo account e ogni suo contenuto?");
+    if (confirmDeletion) {
+        const doublecheck = confirm("Sei davvero sicuro?");
+        if (doublecheck) {
+            try {
+                const response = await fetch("/Cookit/api/delete_account.php", {
+                    method: "POST",
+                    body: new FormData().append("target_id", userId),
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert("È statu un piacere cucinare insieme, speriamo di rivederci!");
+                    window.location.href = "/Cookit/index.php";
+                } else {
+                    console.error(result.message);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
 }

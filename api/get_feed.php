@@ -1,7 +1,5 @@
 <?php
-/**
- * Provides all datas tu update the feed on ther user's home page
- */
+
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
@@ -18,10 +16,10 @@ $FAMUS_TIME = 1;
 try {
    $sql = "
         (
-            -- PARTE 1: Ricette dei profili seguiti negli ultimi 7 giorni
+            -- Ricette dei profili seguiti, negli ultimi 7 giorni
             SELECT 
                 r.Id AS post_id, r.Nome AS titolo, r.Difficolta, r.Tempo_Preparazione, 
-                r.Immagine, r.Preparazione, r.Data_Pubblicazione, u.Username AS autore
+                r.Immagine, r.Preparazione, r.Data_Pubblicazione, u.Id AS user_id, Immagine_Profilo, u.Username AS autore
             FROM RICETTE r
             JOIN UTENTI u ON r.Utente_Id = u.Id
             JOIN FOLLOWERS f ON r.Utente_Id = f.Followed_Id
@@ -30,11 +28,11 @@ try {
         )
         UNION
         (
-            -- PARTE 2: Ricette pubblicate nelle ultime 24 ore da CHIUNQUE, 
+            -- Ricette pubblicate nelle ultime 24 ore da CHIUNQUE, 
             -- ma dando la precedenza a chi ha più follower (se esistono)
             SELECT 
                 r.Id AS post_id, r.Nome AS titolo, r.Difficolta, r.Tempo_Preparazione, 
-                r.Immagine, r.Preparazione, r.Data_Pubblicazione, u.Username AS autore
+                r.Immagine, r.Preparazione, r.Data_Pubblicazione, u.Id AS user_id, u.Immagine_Profilo, u.Username AS autore
             FROM RICETTE r
             JOIN UTENTI u ON r.Utente_Id = u.Id
             WHERE r.Data_Pubblicazione >= NOW() - INTERVAL $FAMUS_TIME DAY
@@ -56,6 +54,7 @@ try {
 
     echo json_encode([
         "success" => true,
+        "user_id" => $current_user_id,
         "count" => count($feed_posts),
         "feed" => $feed_posts
     ]);

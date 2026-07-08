@@ -1,3 +1,6 @@
+import './recipeUpload.js';
+import './cropper.js';
+
 const EXTERN_API_TIMER = 800;
 let apiTimer;
 let selectedIngredients = [];
@@ -62,11 +65,15 @@ function addIngredient(ingName) {
         selectedIngredients.push(ingName);
         const li = document.createElement("li");
         li.textContent = ingName;
+        li.className = "flex items-center gap-s"
         const input = document.createElement("input");
         input.type = "number";
+        input.className = "input-base txt-s p-m"
+        input.style.width = "4rem";
         input.name = `ingredients[${ingredientsCounter}][qty]`;
         const select = document.createElement("select");
         select.name = `ingredients[${ingredientsCounter}][unit]`;
+        select.className = "input-base txt-s p-m"
         const optG = document.createElement("option");
         optG.textContent = "g";
         optG.value = "g";
@@ -81,7 +88,9 @@ function addIngredient(ingName) {
         hiddenInput.name = `ingredients[${ingredientsCounter}][name]`;
         hiddenInput.value = ingName;
         const btn = document.createElement("button");
-        btn.textContent = "elimina";
+        btn.className = "p-s text-white rounded-md";
+        btn.style.backgroundColor = "red";
+        btn.textContent = "Elimina";
         btn.addEventListener("click", () => removeIngredient(li, ingName));
 
         select.appendChild(optG);

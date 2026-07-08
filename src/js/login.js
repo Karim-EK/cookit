@@ -14,8 +14,7 @@ if (logingForm) {
                 console.log("Autenticato con successo");
                 window.location.href = "/Cookit/pages/home.html"; 
             } else {
-                console.log("Errore di autenticazione:", data.messaggio);
-                alert(data.messaggio); // O inserisci il testo in un <span> rosso nel form
+                console.error("Errore di autenticazione:", data.messaggio);
             }
     
         } catch (error) {

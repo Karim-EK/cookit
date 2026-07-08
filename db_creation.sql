@@ -1,4 +1,3 @@
--- Cancellazione del database se già esistente per evitare conflitti di sovrascrittura
 DROP DATABASE IF EXISTS COOKIT;
 CREATE DATABASE COOKIT;
 USE COOKIT;
@@ -9,17 +8,17 @@ CREATE TABLE UTENTI (
     Nome VARCHAR(100) NOT NULL,
     Cognome VARCHAR(100) NOT NULL,
     Data_Nascita DATE NOT NULL,
-    Immagine_Profilo LONGTEXT, 
     Username VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(150) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
+    Immagine_Profilo LONGTEXT NULL,
     Data_Iscrizione TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. TABELLA PONTE: FOLLOWERS (Relazione Molti-a-Molti tra Utenti)
+-- 2. TABELLA FOLLOWERS
 CREATE TABLE FOLLOWERS (
-    Follower_Id INT NOT NULL,  -- L'utente che segue
-    Followed_Id INT NOT NULL,  -- L'utente seguito
+    Follower_Id INT NOT NULL,
+    Followed_Id INT NOT NULL,
     Data_Seguito TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (Follower_Id, Followed_Id),
     FOREIGN KEY (Follower_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE,
@@ -32,15 +31,15 @@ CREATE TABLE RICETTE (
     Utente_Id INT NOT NULL,
     Nome VARCHAR(255) NOT NULL,
     Difficolta ENUM('facile', 'medio', 'difficile') NOT NULL,
-    Tempo_Preparazione INT NOT NULL, -- Espresso in minuti interi
-    Immagine LONGTEXT,               -- Supporta stringhe Base64 o percorsi URL lunghi
-    Ingredienti JSON NOT NULL,       -- Struttura dati array [Nome, Qta, Unita]
+    Tempo_Preparazione INT NOT NULL,
+    Immagine LONGTEXT NULL,
+    Ingredienti JSON NOT NULL,
     Preparazione TEXT NOT NULL,
     Data_Pubblicazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Utente_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE
 );
 
--- 4. TABELLA PONTE: LIKES (Relazione Molti-a-Molti tra Utenti e Ricette)
+-- 4. TABELLA LIKES
 CREATE TABLE LIKES (
     Utente_Id INT NOT NULL,
     Ricetta_Id INT NOT NULL,
@@ -50,10 +49,35 @@ CREATE TABLE LIKES (
     FOREIGN KEY (Ricetta_Id) REFERENCES RICETTE(Id) ON DELETE CASCADE
 );
 
--- 5. TABELLA CARRELLI (Relazione 1-a-1 con Utenti per la lista della spesa persistente)
+-- 5. TABELLA CARRELLI
 CREATE TABLE CARRELLI (
     Utente_Id INT PRIMARY KEY,
-    Lista_Ingredienti JSON NOT NULL,  -- Lista della spesa salvata in formato strutturato JSON
+    Lista_Ingredienti JSON NOT NULL,
     Ultimo_Aggiornamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (Utente_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE
+);
+
+-- 6. TABELLA COMMENTI
+CREATE TABLE COMMENTI (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Ricetta_Id INT NOT NULL,
+    Utente_Id INT NOT NULL,
+    Testo TEXT NOT NULL,
+    Data_Commento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (Ricetta_Id) REFERENCES RICETTE(Id) ON DELETE CASCADE,
+    FOREIGN KEY (Utente_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE
+);
+
+-- 7. TABELLA NOTIFICHE
+CREATE TABLE NOTIFICHE (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Utente_Destinatario_Id INT NOT NULL, -- Chi riceve l'avviso
+    Utente_Attore_Id INT NOT NULL,       -- Chi ha compiuto l'azione
+    Tipo ENUM('commento', 'like', 'follow', 'nuova_ricetta') NOT NULL,
+    Ricetta_Id INT NULL,                 -- NULL se il tipo è 'follow'
+    Letta BOOLEAN DEFAULT FALSE,
+    Data_Notifica TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (Utente_Destinatario_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE,
+    FOREIGN KEY (Utente_Attore_Id) REFERENCES UTENTI(Id) ON DELETE CASCADE,
+    FOREIGN KEY (Ricetta_Id) REFERENCES RICETTE(Id) ON DELETE CASCADE
 );

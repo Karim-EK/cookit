@@ -1,22 +1,22 @@
+<!DOCTYPE html>
 <html lang="it">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookit-SingUp</title>
+  <title>Cookit</title>
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
   <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
 </head>
 
 <body>
-  <header>
-    <a href="/Cookit/index.html">
-      <svg class="h-logo-m m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo"
-        xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <header class="shadow-lg sticky-top bg-base flex p-xs w-full mb-s">
+    <a style="padding-right: 1.2rem;" class="mx-auto" href="/Cookit/index.php">
+      <svg class="h-logo-s" viewBox="0 0 500 200" id="svg_cookit_logo" >
         <defs id="defs1">
           <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
@@ -57,56 +57,64 @@
   </header>
 
   <main class="">
-    <form id="recipe-form">
-      <label for="recipe-name">Nome Ricetta:</label>
-      <input id="recipe-name" class="recipe-upld-name" name="recipe-name" type="text" placeholder="Es: Tagliatelle al Ragù">
-      <label for="difficulty">Quanto ritieni complicata la preparazione della ricetta?</label>
-      <select name="difficulty" id="difficulty">
-        <option value="facile">facile</option>
-        <option value="medio">medio</option>
-        <option value="difficile">difficile</option>
-      </select>
-      <label for="prep-time">Quanto tempo è necessiario per preparare la tua ricetta?</label>
-      <input type="number" id="prep-time" name="prep-time" placeholder="60"> <span>minuti</span>
-      <label for="search-ingr">Cerca Ingrediente:</label>
-      <p>Non è necessario specificare il sale</p>
-      <input id="search-ingr" type="text" placeholder="Es: aglio, pomodoro, ecc...">
-      <ul id="search-results" style="display: none; border: 1px solid #ccc;"></ul>
-
-      <p>Ingredienti aggiunti:</p>
-      <ul id="ingredients-list"></ul>
-
-      <label for="recipe-description">Descrivi la preparazione della tua ricetta</label>
-      <p>Ricorda che dovrai spiegare come usarai ciascun <span>ingrediente</span> che hai utilizzato</p>
-      <textarea name="recipe-description" id="recipe-description"></textarea>
-      <div id="missing-ing-container"></div>
-      <p>Condividi una foto del tuo piatto!</p>
-     
-      
-      <label for="image-upload">Scegli la foto della ricetta:</label>
-      <input type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
-
-      <div id="crop-ui" style="display: none;">
-          <p>Trascina per posizionare il ritaglio (Proporzione 4:3)</p>
-          
-          <div>
-              <img id="image-to-crop" src="" style="display: block; max-width: 100%;">
-          </div>
-          
-          <button type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+    <form id="recipe-form" class="flex flex-col gap-m">
+      <label for="recipe-name" class="txt-m text-primary txt-center">Titolo Ricetta:</label>
+      <input id="recipe-name" class="input-base txt-s p-m" name="recipe-name" type="text" placeholder="Es: Tagliatelle al Ragù">
+      <div class="flex items-center justify-between">
+        <p class="txt-ms text-primary">Condividi una foto del tuo piatto</p>
+        <label for="image-upload" class="p-m rounded-md text-white bg-primary">Carica Foto</label>
       </div>
 
-      <img id="final-preview" style="display: none;">
+      <div class="flex flex-col gap-s" id="crop-ui" style="display: none;">
+        <p>Trascina per posizionare il ritaglio</p>
+        <div>
+          <img alt="anteprima immagine da ritagliare" id="image-to-crop" src="#" style="display: block; max-width: 100%;">
+        </div>
+        <button class="self-center p-s bg-primary text-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+      </div>
+      
+      <img alt="immagine ritagliata pronta per essere pubblicata" src="#" id="final-preview" class="hidden" style="max-width: 100%;">
+
+      <input class="hidden" type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
+      <div class="flex items-center">
+        <label for="difficulty" class="flex-70 txt-ms text-primary">Difficoltà Ricetta</label>
+        <select class="input-base txt-s p-m" name="difficulty" id="difficulty">
+          <option value="facile">facile</option>
+          <option value="medio">medio</option>
+          <option value="difficile">difficile</option>
+        </select>
+      </div>
+      <div class="flex items-center">
+        <label for="prep-time" class="txt-ms text-primary">Tempo di preparazione</label>
+        <div class="flex ml-auto items-center">
+          <input style="width: 3rem;" class="input-base w-auto txt-s p-m" type="number" id="prep-time" name="prep-time" placeholder="60">
+          <span class="txt-s">minuti</span>
+        </div>
+      </div>
+      <label for="search-ingr" class="txt-m text-primary">Aggiungi Ingredienti:</label>
+      <input class="input-base w-auto txt-s p-m" id="search-ingr" type="text" placeholder="Es: aglio, pomodoro, ecc...">
+      <p class="txt-s">Non è necessario specificare il sale</p>
+      <ul id="search-results" style="display: none; border: 1px solid #ccc;"></ul>
+
+      <p class="txt-ms text-primary">Ingredienti aggiunti:</p>
+      <ul id="ingredients-list"></ul>
+      <div>
+        <label for="recipe-description">Descrivi la preparazione della tua ricetta</label>
+        <p>Ricorda che dovrai spiegare come usarai ciascun <span>ingrediente</span> che hai aggiunto</p>
+      </div>
+      <textarea style="height: 35vh; border: none;" class="rounded-md" name="recipe-description" id="recipe-description"></textarea>
+      <div id="missing-ing-container"></div>
+
       <input type="hidden" name="cropped_image_data" id="cropped_image_data">
 
-      <button type="submit">Carica Ricetta</button>
+      <button class="self-center txt-m p-m rounded-md text-white bg-accent mb-l" type="submit">Carica Ricetta</button>
     </form>
   </main>
 
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/Cookit/src/js/main.js"></script>
+  <script type="module" src="/Cookit/src/js/recipeForm.js"></script>
 </body>
 
 </html>

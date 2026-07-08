@@ -6,55 +6,56 @@ const originalImageCache = new Map();
 const feedContainer = document.getElementById("feed-container");
 
 if (feedContainer) {
-    feedContainer.addEventListener("click", async function(event) {
-        const ingrBtn = event.target.closest(".ingr-btn");
-        const prepBtn = event.target.closest(".prep-btn");
-        const cookBtn = event.target.closest(".cook-btn");
+    feedContainer.addEventListener("click", (e) => handleMainButtons(e));
+}
 
-        if (!ingrBtn && !prepBtn && !cookBtn) return;
+export async function handleMainButtons(event) {
+    const ingrBtn = event.target.closest('[data-btn-type="ingr-btn"]');
+    const prepBtn = event.target.closest('[data-btn-type="prep-btn"]');
 
-        const activeBtn = ingrBtn || prepBtn || cookBtn;
-        const parentPost = activeBtn.closest(".post");
-        const recipeId = activeBtn.dataset.recipeId;
-        const container = parentPost.querySelector(".dynamic-container");
+    if (!ingrBtn && !prepBtn) return;
 
-        // Saves recipe's image for later use
-        if (!originalImageCache.has(recipeId)) {
-            originalImageCache.set(recipeId, container.innerHTML);
+    const activeBtn = ingrBtn || prepBtn;
+    const parentPost = activeBtn.closest(".post");
+    const recipeId = activeBtn.dataset.recipeId;
+    const container = parentPost.querySelector(".dynamic-container");
+
+    // Salva la stringa HTML dell'immagine per uso futuro
+    if (!originalImageCache.has(recipeId)) {
+        originalImageCache.set(recipeId, container.innerHTML);
+    }
+
+    const currentView = parentPost.dataset.currentView || "image";
+
+    if (ingrBtn) {
+        if (currentView === "ingredients") {
+            restoreImage(container, recipeId);
+            parentPost.dataset.currentView = "image";
+        } else {
+            await showIngredients(ingrBtn);
+            parentPost.dataset.currentView = "ingredients";
         }
-
-        // 3. LETTURA DELLO STATO: Leggiamo cosa sta mostrando questo post specifico.
-        // Se non è ancora stato cliccato nulla, lo stato di default è "image"
-        const currentView = parentPost.dataset.currentView || "image";
-
-        if (ingrBtn) {
-            if (currentView === "ingredients") {
-                // TOGGLE OFF: Se erano già visibili gli ingredienti, ripeschiamo l'immagine dalla mappa
-                container.innerHTML = originalImageCache.get(recipeId);
-                parentPost.dataset.currentView = "image";
-            } else {
-                // TOGGLE ON: Mostriamo gli ingredienti
-                await showIngredients(ingrBtn);
-                parentPost.dataset.currentView = "ingredients";
-            }
-        } 
-        
-        else if (prepBtn) {
-            if (currentView === "preparation") {
-                // TOGGLE OFF: Se era già visibile la preparazione, ripristiniamo l'immagine
-                container.innerHTML = originalImageCache.get(recipeId);
-                parentPost.dataset.currentView = "image";
-            } else {
-                // TOGGLE ON: Mostriamo la preparazione
-                await showPreparation(prepBtn);
-                parentPost.dataset.currentView = "preparation";
-            }
-        } 
-        
-        else if (cookBtn) {
-            cookRecipe(cookBtn);
+    } 
+    else if (prepBtn) {
+        if (currentView === "preparation") {
+            restoreImage(container, recipeId);
+            parentPost.dataset.currentView = "image";
+        } else {
+            await showPreparation(prepBtn);
+            parentPost.dataset.currentView = "preparation";
         }
-    });
+    }
+}
+
+function restoreImage(container, recipeId) {
+    container.innerHTML = originalImageCache.get(recipeId);
+    const restoredImg = container.querySelector("img");
+    if (restoredImg) {
+        restoredImg.classList.add("cursor-pointer"); 
+        restoredImg.addEventListener("click", function() {
+            window.location.href = `/Cookit/pages/post.html?id=${recipeId}`;
+        });
+    }
 }
 
 async function showIngredients(btn) {
@@ -74,6 +75,7 @@ async function showIngredients(btn) {
         ul.className = "ingredients-feed-list";
         result.data.forEach(ing => {
             const li = document.createElement("li");
+            li.style.marginLeft = "1rem";
             li.textContent = `${ing.name} - ${ing.qty} ${ing.unit}`;
             ul.appendChild(li);
         });
@@ -96,14 +98,9 @@ async function showPreparation(btn) {
         if (!result.success) {
             throw new Error(result.message || "Errore nel recupero dati dal server");
         }
-        // Sistemato il testo semantico dell'errore nel catch (era impostato su "ingredienti")
         container.innerHTML = `<p class="p-s">${result.data}</p>`; 
     } catch (error) {
         console.error("Errore nel recupero della preparazione:", error);
         container.innerHTML = "<p class='text-danger'>Impossibile caricare la preparazione.</p>";
     }
-}
-
-function cookRecipe(btn) {
-    //TODO: Implementazione futura
 }

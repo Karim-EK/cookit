@@ -1,9 +1,5 @@
-/**
- * Send Recipe data tu the DB
- */
 const recipeForm = document.getElementById("recipe-form");
 if (recipeForm) {
-    debugger;
     recipeForm.addEventListener("submit", async function(event) {
         event.preventDefault();
         const formData = new FormData(this);
@@ -16,11 +12,9 @@ if (recipeForm) {
     
             if(data.success) {
                 console.log("Ricetta pubblicata con successo");
-                //TODO: carica pagina del post
-                window.location.href = "/Cookit/pages/home.html"; 
+                window.location.href = `/Cookit/pages/post.html?id=${data.ricetta_id}`; 
             } else {
-                console.log("Errore", data.messaggio);
-                alert(data.messaggio);
+                alert(data.message);
             }
     
         } catch (error) {

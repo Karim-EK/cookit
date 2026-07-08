@@ -1,19 +1,27 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    header("Location: /Cookit/pages/home.html");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookit-SingUp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
   <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
+  <title>Cookit</title>
 </head>
 
 <body>
   <header class="flex">
-    <a style="padding-right: 0.6rem;" class="mx-auto" href="/Cookit/index.php">
-      <svg class="h-logo-m m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo">
+    <a style="padding-right: 1.8rem;" class="mx-auto" href="/Cookit/index.php">
+      <svg class="h-logo-m m-0-auto" viewBox="0 0 500 200" id="svg_cookit_logo">
         <defs id="defs1">
           <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
@@ -53,38 +61,23 @@
     </a>
   </header>
 
-  <main class="flex flex-col items-center">
-    <div class="flex flex-col p-s gap-m mb-s">
-      <h1 class="txt-center">Benvenuto in Cucina </h1>
-      <p class="txt-center">Abbiamo bisogno di qualche informazione prima di metterti ai fornelli!</p>
-    </div>
-    <form id="signup-form" class="flex flex-col items-center justify-between h-full w-70">
-      <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-        <legend class="txt-m text-primary mb-s">Su di te:</legend>
-        <label class="self-start" for="name">Nome:</label>
-        <input class="input-base input-md" type="text" required placeholder="Mario" id="name" name="name">
-        <label class="self-start" for="surname">Cognome:</label>
-        <input class="input-base input-md" type="text" required placeholder="Rossi" id="surname" name="surname">
-        <label class="self-start" for="username">Username</label>
-        <input class="input-base input-md" type="text" required placeholder="ChefGuido02" id="username" name="username">
-        <label class="self-start" for="birth-date">Data di nascita:</label>
-        <input class="input-base input-md" type="date" required id="birth-date" name="birth-date">
-      </fieldset>
-      <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-        <legend class="txt-m text-primary mb-s">Credenziali:</legend>
-        <label class="self-start" for="email">Email:</label>
-        <input class="input-base input-md" type="email" required id="email" name="email">
-        <label class="self-start" for="password">Password:</label>
-        <input class="input-base input-md" type="password" required id="password" name="password">
-      </fieldset>
-      <input class="btn-base text-white txt-l p-m my-m bg-accent" type="submit" value="Registrati Ora">
+  <main class="flex flex-col items-center justify-evenly">
+    <h1>Bentornato Chef </h1>
+    <form id="login" class="flex flex-col items-center gap-l w-70 border-bottom-thin">
+      <label class="txt-m" for="email">Email:</label>
+      <input class="input-base input-lg" id="email" name="email" type="email" required placeholder="example@email.com">
+      <label class="txt-m" for="pw">Password:</label>
+      <input class="input-base input-lg" type="password" name="password" id="pw" required placeholder="Password">
+      <input class="btn-base text-white txt-l p-m my-m bg-primary" type="submit" value="Login">
     </form>
+    <h1 class="mb-s">Non hai un'account?</h1>
+    <a class="btn-base text-white txt-l p-l mb-m bg-accent" href="./pages/registration.html">Registrati</a>
   </main>
 
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/Cookit/src/js/signUp.js"></script>
+  <script type="module" src="/Cookit/src/js/login.js"></script>
 </body>
 
 </html>

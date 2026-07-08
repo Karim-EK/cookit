@@ -1,19 +1,14 @@
 <?php
-/**
- * Provides "Preparations" and "Ingredients" datas from Recipes
- */
+
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
 require_once "./config/api_helpers.php";
 
 verify_request_method("GET");
-verify_user_logged_in();
 verify_required_params($_GET, ["id", "q"]);
 
-/**
- * 'i' for Ingredients and 'p' for Preparation
- */
+// i' for Ingredients and 'p' for Preparation
 $id_recipe = $_GET["id"] ?? null;
 $query_type = $_GET["q"] ?? null;
 

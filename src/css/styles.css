@@ -4,13 +4,14 @@
 *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
 html { box-sizing: border-box; background-color: var(--bg-color); color: var(--txt-color); }
 body { font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-main { flex: 1; }
+main { flex: 1; padding: 0.3rem;}
 header { padding: 1rem; }
 
 /* =========================================
    2. UTILITIES (Layout, Spaziature, Dimensioni, Testo)
    ========================================= */
 .flex { display: flex; }
+.inline-flex {display: inline-flex;}
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
 .content-evenly {align-content: space-evenly;}
@@ -19,14 +20,18 @@ header { padding: 1rem; }
 .justify-between { justify-content: space-between; }
 .justify-evenly { justify-content: space-evenly; }
 .justify-end { justify-content: flex-end; }
+.flex-90 { flex: 90%; }
+.flex-80 { flex: 80%; }
 .flex-70 { flex: 70%; }
 .flex-10 { flex: 10%; }
 .flex-50 { flex: 0 0 50%; }
 .self-start {align-self: flex-start;}
+.self-center {align-self: center;}
 .self-end {align-self: flex-end;}
 
 .grid { display: grid; }
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.centered-item {align-self: center; justify-self: center;}
 
 .gap-xs { gap: 0.2rem; }
 .gap-s { gap: 0.4rem; }
@@ -44,14 +49,20 @@ header { padding: 1rem; }
 .pt-m { padding-top: 0.7rem; }
 .pb-s { padding-bottom: 0.5rem; }
 
-.m-0-auto { margin: 0 auto; }
+.m-m { margin: 1rem ; }
+.m-l { margin: 2rem ; }
+.mx-auto { margin: 0 auto; }
 .ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+.mr-0 { margin-right: 0; }
 .mr-m { margin-right: 1rem; }
 .mt-s { margin-top: 0.5rem; }
 .mt-m { margin-top: 1rem; }
+.mt-l { margin-top: 2rem; }
 .mb-s { margin-bottom: 0.5rem; }
 .mb-m { margin-bottom: 1rem; }
 .mb-l { margin-bottom: 2rem; }
+.my-s { margin: 0.6rem 0; }
 .my-m { margin: 1rem 0; }
 .my-l { margin: 2rem 0; }
 
@@ -62,6 +73,7 @@ header { padding: 1rem; }
 .w-60 { width: 60%; }
 .w-auto {width: auto;}
 .h-full { height: 100%; }
+.h-50 { height: 50%; }
 .h-5 { height: 5%; }
 .min-w-0 { min-width: 0; }
 
@@ -71,8 +83,10 @@ header { padding: 1rem; }
 .h-logo-l { height: 6rem; }
 .h-post-img { height: 37.5vh; }
 
-.hidden { display: none;}
+.hidden { display: none; }
+.invisible { visibility: hidden; }
 .sticky-top { position: sticky; top: 0; }
+.blck { display: block; }
 .ln-blck {display: inline-block;}
 .ln {display: inline;}
 .object-cover { object-fit: cover; }
@@ -80,16 +94,23 @@ header { padding: 1rem; }
 
 .txt-center { text-align: center; }
 .txt-italic { font-style: italic; }
-.txt-s { font-size: 0.7rem; }
+.txt-xs { font-size: 0.7rem; }
+.txt-s { font-size: 0.9rem; }
+.txt-ms { font-size: 1.1rem; }
 .txt-m { font-size: 1.5rem; }
 .txt-l { font-size: 1.8rem; }
+.bold { font-weight: bold; }
+.word-wrap { overflow-wrap: break-word; }
 .truncate { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 .bg-base { background-color: var(--bg-color); }
+.bg-light { background-color: var(--green-lth); }
 .bg-primary { background-color: var(--green-drk); }
 .bg-accent { background-color: var(--act-color); }
 .bg-notify { background-color: var(--ntf-color); }
+.txt-act { color: var(--act-color); }
 .text-primary { color: var(--green-drk); }
+.text-light { color: var(--green-lth); }
 .text-white { color: white; }
 
 .border-none { border: none; }
@@ -121,7 +142,65 @@ header { padding: 1rem; }
    3. COMPONENTI (Estetica Specifica)
    ========================================= */
 
-#togglable {
+#notification-container {
+  flex-direction: column;
+  position: absolute;
+  width: 53vw;
+  font-size: 0.8rem;
+  background-color: white;
+  text-align: center;
+}
+
+#badge {
+  font-size: 0.9rem;
+  right: 1.5rem;
+  padding: 0 0.3rem;
+  border-radius: 30%;
+  background-color: var(--ntf-color);
+  color: white;
+  position: absolute;
+}
+
+#bell-icon {
+  margin-right: 1.5rem;
+  position: relative;
+  width: 2.2rem;
+}
+
+#recipe-upload-btn {
+  font-size: 2.2rem;
+  position: fixed;
+  padding: 0 0.67rem;
+  top: 92vh;
+  left: 50vw;
+  border-radius: 50%;
+  color: #e95d04;
+  border: 2px solid #e95d04;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+#side-menu {
+  background-color: #f2f2e3;
+  font-size: 1.2rem;
+  margin-left: auto;
+  border: none;
+  padding: 1rem;
+  height: 100vh;
+}
+
+#side-menu:popover-open {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; 
+}
+
+/* Oscuramento */
+#side-menu:popover-open::backdrop {
+  background: rgba(0, 0, 0, 0.4); 
+}
+ 
+#taggable {
   position: absolute;
   top: 8vh;
   right: 10vw;
@@ -135,6 +214,14 @@ header { padding: 1rem; }
   border: none;
   display: block;
   width: 100%;
+}
+
+#comment-form {
+  top: 21vh;
+  left: 10vw;
+  position: absolute;
+  background-color: aliceblue;
+  width: 80vw;
 }
    
 .ui-card {
@@ -177,7 +264,7 @@ header { padding: 1rem; }
 
 #cook-btn {
   padding: 0.8rem 0.3rem 0 0.3rem;
-}
+} 
 .main-btn-icon:hover {
   background-color: rgba(129, 199, 132, 0.25);
 }
@@ -187,11 +274,6 @@ header { padding: 1rem; }
   border: none;
   cursor: pointer;
 }
-
-/* =========================================
-   4. JS
-   ========================================= */
-.post {};
 
 /* =========================================
    5. RESPONSIVE

@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cookit Login</title>
+  <title>Cookit</title>
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
   <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
@@ -13,9 +13,8 @@
 
 <body>
   <header class="shadow-lg sticky-top bg-base flex items-center p-xs justify-between">
-    <a class="flex-70" href="/Cookit/index.html">
-      <svg class="h-logo-s" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo" xmlns="http://www.w3.org/2000/svg"
-        xmlns:svg="http://www.w3.org/2000/svg">
+    <a class="flex-70" href="/Cookit/index.php">
+      <svg class="h-logo-s" viewBox="0 0 500 200" id="svg_cookit_logo">
         <defs id="defs1">
           <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
@@ -60,33 +59,39 @@
           d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" />
       </svg>
     </button>
-    <a class="flex-10 flex justify-center" href="#">
+    <a title="your profile page" id="profile-btn" class="flex-10 flex justify-center" href="#">
       <svg class="h-icon" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
         <path
           d="M240 192C240 147.8 275.8 112 320 112C364.2 112 400 147.8 400 192C400 236.2 364.2 272 320 272C275.8 272 240 236.2 240 192zM448 192C448 121.3 390.7 64 320 64C249.3 64 192 121.3 192 192C192 262.7 249.3 320 320 320C390.7 320 448 262.7 448 192zM144 544C144 473.3 201.3 416 272 416L368 416C438.7 416 496 473.3 496 544L496 552C496 565.3 506.7 576 520 576C533.3 576 544 565.3 544 552L544 544C544 446.8 465.2 368 368 368L272 368C174.8 368 96 446.8 96 544L96 552C96 565.3 106.7 576 120 576C133.3 576 144 565.3 144 552L144 544z" />
       </svg>
     </a>
-    <a class="flex-10 flex justify-center" href="#">
+    <button popovertarget="side-menu" class="flex-10 flex justify-center">
       <svg class="h-icon" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
         <path
           d="M96 160C96 142.3 110.3 128 128 128L512 128C529.7 128 544 142.3 544 160C544 177.7 529.7 192 512 192L128 192C110.3 192 96 177.7 96 160zM96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320zM544 480C544 497.7 529.7 512 512 512L128 512C110.3 512 96 497.7 96 480C96 462.3 110.3 448 128 448L512 448C529.7 448 544 462.3 544 480z" />
       </svg>
-    </a>
+    </button>
   </header>
-
-  <div id="togglable" class="hidden">
-    <textarea name="searched-text" id="searched-text" class="txt-center pt-m" placeholder="cerca nome utente o titolo ricetta"></textarea>
-    
+  <div id="side-menu" popover>
+    <a href="/Cookit/pages/profile-img.html">Immagine Profilo</a>
+    <button id="logout-btn">Logout</button>
+    <button id="delete-profile-btn">Elimina Profilo</button>
   </div>
-  <main id="feed-container" class="flex flex-col items-center gap-l my-m">
-  </main>
+  <div id="taggable" class="hidden">
+    <label class="hidden" for="searched-text">cerca nome utente o titolo ricetta</label>
+    <textarea name="searched-text" id="searched-text" class="txt-center pt-m" placeholder="cerca nome utente o titolo ricetta"></textarea>
+  </div>
+  <button id="recipe-upload-btn">
+    +
+  </button>
+  <main id="feed-container" class="flex flex-col items-center gap-l my-m"></main>
   <div id="feed-sentinel" style="height: 20px;"></div>
-  <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">
+  <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-s txt-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/Cookit/src/js/main.js"></script>
+  <script type="module" src="/Cookit/src/js/homeFeed.js"></script>
 </body>
 </html>
 

@@ -11,7 +11,7 @@ if (signupForm) {
             const data = await response.json();
             if(data.success) {
                 alert("Account creato con successo, puoi effettuare il login");
-                location.href = "/Cookit/index.html";
+                location.href = "/Cookit/index.php";
             } else {
                 console.log("Errore di autenticazione:", data.messaggio);
                 alert(data.messaggio);

@@ -1,8 +1,7 @@
 <?php
-// api_helpers.php
 
 /**
- * Invia una risposta JSON standardizzata e interrompe lo script.
+ * Send stardazed Json response and exit the script
  */
 function send_json_response(bool $success, string $message, $data = null, int $http_code = 200) {
     http_response_code($http_code);
@@ -11,11 +10,11 @@ function send_json_response(bool $success, string $message, $data = null, int $h
         "message" => $message,
         "data"    => $data
     ]);
-    exit; // Ferma l'esecuzione qui, evitando altri controlli
+    exit;
 }
 
 /**
- * GUARDIA DI METODO: Blocca la richiesta se non corrisponde al metodo HTTP atteso.
+ * Guard for HTTP method
  */
 function verify_request_method(string $expected_method) {
     if ($_SERVER['REQUEST_METHOD'] !== strtoupper($expected_method)) {
@@ -24,7 +23,7 @@ function verify_request_method(string $expected_method) {
 }
 
 /**
- * GUARDIA DI AUTENTICAZIONE: Blocca la richiesta se l'utente non è loggato.
+ * Auth Guard
  */
 function verify_user_logged_in() {
     if (!isset($_SESSION['user_id'])) {
@@ -33,7 +32,7 @@ function verify_user_logged_in() {
 }
 
 /**
- * GUARDIA DI INPUT: Verifica che i parametri obbligatori esistano nell'array target ($_GET o $_POST)
+ * Guard for params
  */
 function verify_required_params(array $array_target, array $required_params) {
     foreach ($required_params as $param) {

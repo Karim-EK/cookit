@@ -1,21 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+  <title>Cookit</title>
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
   <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
-  <title>Cookit Login</title>
 </head>
 
 <body>
-  <header>
-    <a href="/Cookit/index.html">
-      <svg class="h-logo-m m-0-auto" viewBox="0 0 500 200" version="1.1" id="svg_cookit_logo"
-        xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <header class="shadow-lg sticky-top bg-base flex p-xs w-full mb-s">
+    <a style="padding-right: 1.2rem;" class="mx-auto" href="/Cookit/index.php">
+      <svg class="h-logo-s" viewBox="0 0 500 200" id="svg_cookit_logo">
         <defs id="defs1">
           <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
@@ -55,23 +55,28 @@
     </a>
   </header>
 
-  <main class="flex flex-col items-center justify-evenly">
-    <h1>Bentornato Chef </h1>
-    <form id="login"class="flex flex-col items-center gap-l w-70 border-bottom-thin">
-      <label class="txt-m" for="email">Email:</label>
-      <input class="input-base input-lg" id="email" name="email" type="email" required placeholder="example@email.com">
-      <label class="txt-m" for="pw">Password:</label>
-      <input class="input-base input-lg" type="password" name="password" id="pw" required placeholder="Password">
-      <input class="btn-base text-white txt-l p-m my-m bg-primary" type="submit" value="Login">
+  <main class="flex flex-col">
+    <form id="image-form" style="flex-grow: 1;" class="txt-center flex flex-col items-center justify-center gap-l">
+      <label for="image-upload" class="p-m bg-primary text-white rounded-md">Scegli File</label>
+      <input class="hidden" type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
+      
+      <div class="flex flex-col gap-s" id="crop-ui" style="display: none;">
+        <p>Trascina per posizionare il ritaglio</p>
+        <div>
+          <img alt="anteprima immagine da ritagliare" id="image-to-crop" src="#" style="display: block; max-width: 100%;">
+        </div>
+        <button class="self-center p-s bg-primary text-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+      </div>
+      
+      <img src="#" alt="immagine ritagliata pronta per la pubblicazione" id="final-preview" class="hidden" style="max-width: 100%;">
+      <input type="hidden" name="cropped_image_data" id="cropped_image_data">
+      <button class="p-m bg-accent text-white rounded-md hidden" id="upload-btn" type="submit">Aggiorna Immagine</button>
     </form>
-    <h1 style="margin-top: -1.8rem;">Non hai un'account?</h1>
-    <a class="btn-base text-white txt-l p-l mb-m bg-accent" href="./pages/registration.html">Registrati</a>
   </main>
-
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/Cookit/src/js/main.js"></script>
+  <script type="module" src="/Cookit/src/js/profileImg.js"></script>
 </body>
 
 </html>

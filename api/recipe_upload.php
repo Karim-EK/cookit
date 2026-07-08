@@ -1,7 +1,4 @@
 <?php
-/**
- * Uploads Recipe datas to DB
- */
 header("Content-Type: application/json; charset=utf-8");
 session_start();
 require_once "./config/db_connect.php";
@@ -25,10 +22,7 @@ if (empty($nome) || empty($difficolta) || !$tempo || empty($preparazione)) {
     send_json_response(false, "Devi inserire almeno un ingrediente.", null, 422);
 }
 
-// 6. La Magia di array_values()
-// Ricordi quando abbiamo implementato il tasto "Elimina" che saltava gli indici (es. 0, 2, 3)?
-// Se diamo a json_encode() un array con "buchi" numerici, genererà un Oggetto invece di un Array.
-// array_values() compatta l'array, riordinando gli indici a 0, 1, 2, garantendo un JSON Array perfetto.
+// removes missing indexs
 $ingredienti_json = json_encode(array_values($ingredienti_raw));
 
 try {
@@ -40,14 +34,14 @@ try {
         'nome'         => $nome,
         'difficolta'   => $difficolta,
         'tempo'        => $tempo,
-        'immagine'     => $immagine_b64,     // Salviamo direttamente la lunga stringa Base64
-        'ingredienti'  => $ingredienti_json, // Salviamo l'array trasformato in stringa JSON
+        'immagine'     => $immagine_b64,    
+        'ingredienti'  => $ingredienti_json, 
         'preparazione' => $preparazione
     ]);
     echo json_encode([
         "success" => true, 
         "messaggio" => "Ricetta pubblicata con successo!",
-        "ricetta_id" => $pdo->lastInsertId() // Restituiamo l'ID appena creato se dovesse servire al frontend
+        "ricetta_id" => $pdo->lastInsertId()
     ]);
 
 } catch (PDOException $e) {
