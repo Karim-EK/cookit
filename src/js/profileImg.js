@@ -22,6 +22,8 @@ async function uploadImg(e) {
         if (result.success) {
             console.log(result.message);
             location.href = `/Cookit/pages/profile.html?id=${result.data.id}`;
+        } else {
+            location.href = "/Cookit/index.php";
         }
     } catch (error) {
         console.error(error);

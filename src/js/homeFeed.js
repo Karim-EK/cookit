@@ -4,6 +4,7 @@ import './homeButtons.js';
 /**
  * Shows most recents users's post in the feed
  */
+
 let postCache = [];
 const feedContainer = document.getElementById("feed-container");
 const sentinel = document.getElementById("feed-sentinel");
@@ -39,9 +40,8 @@ async function initFeed() {
             feedContainer.innerHTML = "<p>Nessuna nuova ricetta da mostrarti al momento!</p>";
             return;
         }
-        // Load first 3 posts at once to fill the height of the screen
-        // TODO: new approch for desktop
-        const initial = Math.min(3, postCache.length);
+        const isDesktop = window.innerWidth >= 900;
+        const initial = Math.min(isDesktop ? 9 : 3, postCache.length);
         for (let i = 0; i < initial; i++) {
             renderNextPost();
         }
@@ -140,7 +140,8 @@ function renderNextPost() {
         </div>
     `;
     feedContainer.appendChild(postCard);
-    document.querySelector('[data-content="image"]').addEventListener("click", function() {location.href = `/Cookit/pages/post.html?id=${post.post_id}`});
+    postCard.querySelector('[data-content="image"]').addEventListener("click", function() {
+        location.href = `/Cookit/pages/post.html?id=${post.post_id}`});
 }
 function setupInfiniteScroll() {
     const observer = new IntersectionObserver((entries) => {

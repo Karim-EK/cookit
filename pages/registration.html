@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookit-SingUp</title>
+  <title>Cookit</title>
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
   <link rel="stylesheet" href="/Cookit/src/css/styles.css" />
@@ -53,14 +53,14 @@
     </a>
   </header>
 
-  <main class="flex flex-col items-center">
+  <main class="flex flex-col items-center container">
     <div class="flex flex-col p-s gap-m mb-s">
       <h1 class="txt-center">Benvenuto in Cucina </h1>
       <p class="txt-center">Abbiamo bisogno di qualche informazione prima di metterti ai fornelli!</p>
     </div>
     <form id="signup-form" class="flex flex-col items-center justify-between h-full w-70">
       <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-        <legend class="txt-m text-primary mb-s">Su di te:</legend>
+        <legend class="txt-m txt-primary mb-s">Su di te:</legend>
         <label class="self-start" for="name">Nome:</label>
         <input class="input-base input-md" type="text" required placeholder="Mario" id="name" name="name">
         <label class="self-start" for="surname">Cognome:</label>
@@ -71,13 +71,13 @@
         <input class="input-base input-md" type="date" required id="birth-date" name="birth-date">
       </fieldset>
       <fieldset class="flex flex-col gap-s w-full border-none mb-s">
-        <legend class="txt-m text-primary mb-s">Credenziali:</legend>
+        <legend class="txt-m txt-primary mb-s">Credenziali:</legend>
         <label class="self-start" for="email">Email:</label>
         <input class="input-base input-md" type="email" required id="email" name="email">
         <label class="self-start" for="password">Password:</label>
         <input class="input-base input-md" type="password" required id="password" name="password">
       </fieldset>
-      <input class="btn-base text-white txt-l p-m my-m bg-accent" type="submit" value="Registrati Ora">
+      <input class="btn-base txt-white txt-l p-m my-m bg-accent" type="submit" value="Registrati Ora">
     </form>
   </main>
 

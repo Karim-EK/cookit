@@ -68,10 +68,10 @@ if (isset($_SESSION['user_id'])) {
       <input class="input-base input-lg" id="email" name="email" type="email" required placeholder="example@email.com">
       <label class="txt-m" for="pw">Password:</label>
       <input class="input-base input-lg" type="password" name="password" id="pw" required placeholder="Password">
-      <input class="btn-base text-white txt-l p-m my-m bg-primary" type="submit" value="Login">
+      <input class="btn-base txt-white txt-l p-m my-m bg-primary" type="submit" value="Login">
     </form>
     <h1 class="mb-s">Non hai un'account?</h1>
-    <a class="btn-base text-white txt-l p-l mb-m bg-accent" href="./pages/registration.html">Registrati</a>
+    <a class="btn-base txt-white txt-l p-l mb-m bg-accent" href="./pages/registration.html">Registrati</a>
   </main>
 
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">

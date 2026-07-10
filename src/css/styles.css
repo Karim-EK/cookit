@@ -11,7 +11,6 @@ header { padding: 1rem; }
    2. UTILITIES (Layout, Spaziature, Dimensioni, Testo)
    ========================================= */
 .flex { display: flex; }
-.inline-flex {display: inline-flex;}
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
 .content-evenly {align-content: space-evenly;}
@@ -20,11 +19,8 @@ header { padding: 1rem; }
 .justify-between { justify-content: space-between; }
 .justify-evenly { justify-content: space-evenly; }
 .justify-end { justify-content: flex-end; }
-.flex-90 { flex: 90%; }
-.flex-80 { flex: 80%; }
 .flex-70 { flex: 70%; }
 .flex-10 { flex: 10%; }
-.flex-50 { flex: 0 0 50%; }
 .self-start {align-self: flex-start;}
 .self-center {align-self: center;}
 .self-end {align-self: flex-end;}
@@ -67,13 +63,9 @@ header { padding: 1rem; }
 .my-l { margin: 2rem 0; }
 
 .w-full { width: 100%; }
-.w-95 { width: 95%; }
-.w-80 { width: 80%; }
 .w-70 { width: 70%; }
-.w-60 { width: 60%; }
 .w-auto {width: auto;}
 .h-full { height: 100%; }
-.h-50 { height: 50%; }
 .h-5 { height: 5%; }
 .min-w-0 { min-width: 0; }
 
@@ -109,31 +101,28 @@ header { padding: 1rem; }
 .bg-accent { background-color: var(--act-color); }
 .bg-notify { background-color: var(--ntf-color); }
 .txt-act { color: var(--act-color); }
-.text-primary { color: var(--green-drk); }
-.text-light { color: var(--green-lth); }
-.text-white { color: white; }
+.txt-primary { color: var(--green-drk); }
+.txt-white { color: white; }
 
 .border-none { border: none; }
 .rounded-md { border-radius: 0.313rem; }
 .rounded-lg { border-radius: 0.625rem; }
 
 
-.shadow-sm { /* 1. Stato di Riposo (Livello Base) */
+.shadow-sm { 
   box-shadow: var(--shadow-sm); 
 }
-.shadow-md { /* 2. Stato di Interazione o Elementi Secondari (Livello Medio) */
+.shadow-md {
   box-shadow: var(--shadow-md); 
   transition: box-shadow 0.3s ease, transform 0.3s ease; 
 }
-.shadow-lg { /* 3. Elementi Fluttuanti (Livello Alto) */
+.shadow-lg { 
   box-shadow: var(--shadow-lg); 
 }
-.shadow-inner { /* 4. Incavo (Livello Negativo) */
+.shadow-inner { /* incavato */
   box-shadow: var(--shadow-inner); 
 }
-.shadow-glow-act { box-shadow: var(--glow-act); } /* 5. Feedback Visivo (Glow) */
-.shadow-glow-primary { box-shadow: var(--glow-primary); }
-.shadow-sm:hover { /* Effetto Hover dinamico per le card */
+.shadow-sm:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
@@ -200,7 +189,7 @@ header { padding: 1rem; }
   background: rgba(0, 0, 0, 0.4); 
 }
  
-#taggable {
+#toggleable {
   position: absolute;
   top: 8vh;
   right: 10vw;
@@ -224,12 +213,8 @@ header { padding: 1rem; }
   width: 80vw;
 }
    
-.ui-card {
-  border-radius: 0.313rem;
-  box-shadow: 0 1px 2px rgba(var(--shadow-base), 0.05), 0 1px 3px rgba(var(--shadow-base), 0.08);
-}
 
-.ui-card-outlined {
+.outlined {
   border: 0.188rem solid var(--green-lth);
   border-radius: 0.625rem;
 }
@@ -262,9 +247,6 @@ header { padding: 1rem; }
   transition: background-color 0.2s ease;
 }
 
-#cook-btn {
-  padding: 0.8rem 0.3rem 0 0.3rem;
-} 
 .main-btn-icon:hover {
   background-color: rgba(129, 199, 132, 0.25);
 }
@@ -275,9 +257,37 @@ header { padding: 1rem; }
   cursor: pointer;
 }
 
+#follower-btn:hover, #follow-btn:hover {
+  cursor: pointer;
+}
+
 /* =========================================
    5. RESPONSIVE
    ========================================= */
 .container { margin: 0 auto; }
-@media (min-width: 640px) { .container { max-width: 640px; } }
-@media (min-width: 1020.25rem) { .container { max-width: 1020.25rem; } }
+@media (min-width: 992px) {
+  .container {width: 70vw;}
+  #feed-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  #svg_cookit_logo-small {
+    height: 6rem;
+  }
+  #recipe-upload-btn {
+    top: 87vh;
+    left: 93vw;
+    transform: scale(1.3);
+  }
+  #home-header {
+
+  }
+  #post-page {
+    width: 50vw;
+    margin: 0 auto;
+  }
+  #post-container .h-post-img { height: 60vh; }
+  #recipes-grid {
+    gap: 0.5rem;
+  }
+}

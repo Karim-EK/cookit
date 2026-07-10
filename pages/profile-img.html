@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <title>Cookit</title>
@@ -55,9 +55,9 @@
     </a>
   </header>
 
-  <main class="flex flex-col">
+  <main class="flex flex-col container">
     <form id="image-form" style="flex-grow: 1;" class="txt-center flex flex-col items-center justify-center gap-l">
-      <label for="image-upload" class="p-m bg-primary text-white rounded-md">Scegli File</label>
+      <label for="image-upload" class="p-m bg-primary txt-white rounded-md">Scegli File</label>
       <input class="hidden" type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
       
       <div class="flex flex-col gap-s" id="crop-ui" style="display: none;">
@@ -65,12 +65,12 @@
         <div>
           <img alt="anteprima immagine da ritagliare" id="image-to-crop" src="#" style="display: block; max-width: 100%;">
         </div>
-        <button class="self-center p-s bg-primary text-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+        <button class="self-center p-s bg-primary txt-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
       </div>
       
       <img src="#" alt="immagine ritagliata pronta per la pubblicazione" id="final-preview" class="hidden" style="max-width: 100%;">
       <input type="hidden" name="cropped_image_data" id="cropped_image_data">
-      <button class="p-m bg-accent text-white rounded-md hidden" id="upload-btn" type="submit">Aggiorna Immagine</button>
+      <button class="p-m bg-accent txt-white rounded-md hidden" id="upload-btn" type="submit">Aggiorna Immagine</button>
     </form>
   </main>
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">

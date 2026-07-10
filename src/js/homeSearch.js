@@ -1,5 +1,5 @@
 const searchBtn = document.getElementById("search-btn");
-const searchPanel = document.getElementById("taggable");
+const searchPanel = document.getElementById("toggleable");
 const searchText = document.getElementById("searched-text");
 const API_TIMER = 300;
 let apiTimer;
@@ -94,7 +94,6 @@ function renderRecipeCard(item) {
     const title = document.createElement("p");
     title.innerText = item.nome_titolo;
     title.style = "max-height:calc((1em + 0.5rem) + 3rem); overflow: hidden;";
-    //TODO: colore difficoltà
     const difficulty = document.createElement("span");
     difficulty.innerText = item.difficolta;
 

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/Cookit/public/favicon.svg" />
   <title>Cookit</title>
   <link rel="stylesheet" href="/Cookit/src/css/normalize.css" />
   <link rel="stylesheet" href="/Cookit/src/css/generic.css" />
@@ -53,23 +52,20 @@
       </svg>
     </a>
   </header>
-  <main id="post-page" class="flex flex-col items-center">
-    <div id="post-container"></div>
 
-    <div id="comment-container" class="w-full outlined"></div>
-  </main>
-  <form id="comment-form" class="rounded-md shadow-lg hidden">
-    <div class="flex flex-col txt-center gap-s p-s">
-      <label class="txt-m my-s" for="user-comment">Fai sapere la tua opinione!</label>
-      <textarea style="height: 20rem;" class="border-none rounded-md" name="user-comment" id="user-comment"></textarea>
-      <button class="txt-white txt-m bg-primary self-center p-m rounded-md my-s" type="submit">Pubblica Commento</button>
+  <main class="container w-full">
+    <div class="flex justify-evenly">
+      <p class="outlined p-s" id="follower-btn">Followers</p>
+      <p class="outlined p-s" id="follow-btn">Seguiti</p>
     </div>
-  </form>
-
+    <div id="follow-container" class="flex flex-col my-m gap-m">
+      
+    </div>
+  </main>
   <footer class="flex h-5 bg-notify justify-end items-center p-s px-m txt-italic">
     <p>Developed by Karim El Kholy</p>
   </footer>
-  <script type="module" src="/Cookit/src/js/post.js"></script>
+  <script type="module" src="/Cookit/src/js/follower.js"></script>
 </body>
 
 </html>

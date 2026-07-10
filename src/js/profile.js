@@ -13,6 +13,7 @@ try {
         renderProfilePage();
     } else {
         console.error("Errore: ", profileData.message);
+        location.href = "/Cookit/index.php";
     }
 } catch (error) {
     console.error("Errore: ", error);
@@ -47,7 +48,7 @@ async function follow() {
 
 function renderProfilePage() {
     const header = document.createElement("div");
-    header.classList = "grid px-s grid-cols-3 pb-s border-bottom-thick";
+    header.classList = "grid px-s grid-cols-3 pb-s border-bottom-thick w-full";
     
     const userImage = document.createElement("img");
     userImage.addEventListener("click", function() {location.href = "/Cookit/pages/profile-img.html"});
@@ -60,7 +61,7 @@ function renderProfilePage() {
     nickname.innerText = profileData.data.profilo.nickname;
 
     const followBtn = document.createElement("button");
-    followBtn.classList = "centered-item p-s bg-primary text-white rounded-md";
+    followBtn.classList = "centered-item p-s bg-primary txt-white rounded-md";
     followBtn.id = "follow-btn";
     followBtn.style = "grid-row-start: 1; grid-column-start: 3;";
 
@@ -78,11 +79,13 @@ function renderProfilePage() {
     follower.innerText = `Follower: ${profileData.data.profilo.numero_follower}`;
     follower.style = "grid-row-start: 2; grid-column-start: 1;";
     follower.id = "follower-counter";
+    follower.addEventListener("click", function() {location.href = `/Cookit/pages/follower.html?id=${userId}`});
 
     const follow  = document.createElement("p");
     follow.classList = "centered-item mt-m m-0-auto";
     follow.innerText = `Segue: ${profileData.data.profilo.numero_seguiti}`;
     follow.style = "grid-row-start: 2; grid-column-start: 2;";
+    follow.addEventListener("click", function() {location.href = `/Cookit/pages/follower.html?id=${userId}`});
 
     const recipe = document.createElement("p");
     recipe.classList = "centered-item mt-m m-0-auto";

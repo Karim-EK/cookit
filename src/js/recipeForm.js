@@ -88,7 +88,7 @@ function addIngredient(ingName) {
         hiddenInput.name = `ingredients[${ingredientsCounter}][name]`;
         hiddenInput.value = ingName;
         const btn = document.createElement("button");
-        btn.className = "p-s text-white rounded-md";
+        btn.className = "p-s txt-white rounded-md";
         btn.style.backgroundColor = "red";
         btn.textContent = "Elimina";
         btn.addEventListener("click", () => removeIngredient(li, ingName));

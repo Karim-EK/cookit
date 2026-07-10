@@ -16,7 +16,7 @@
 <body>
   <header class="shadow-lg sticky-top bg-base flex p-xs w-full mb-s">
     <a style="padding-right: 1.2rem;" class="mx-auto" href="/Cookit/index.php">
-      <svg class="h-logo-s" viewBox="0 0 500 200" id="svg_cookit_logo" >
+      <svg class="h-logo-s" viewBox="0 0 500 200" id="svg_cookit_logo-small" >
         <defs id="defs1">
           <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" id="stop1" />
@@ -56,13 +56,13 @@
     </a>
   </header>
 
-  <main class="">
+  <main class="container">
     <form id="recipe-form" class="flex flex-col gap-m">
-      <label for="recipe-name" class="txt-m text-primary txt-center">Titolo Ricetta:</label>
+      <label for="recipe-name" class="txt-m txt-primary">Titolo Ricetta:</label>
       <input id="recipe-name" class="input-base txt-s p-m" name="recipe-name" type="text" placeholder="Es: Tagliatelle al Ragù">
       <div class="flex items-center justify-between">
-        <p class="txt-ms text-primary">Condividi una foto del tuo piatto</p>
-        <label for="image-upload" class="p-m rounded-md text-white bg-primary">Carica Foto</label>
+        <p class="txt-ms txt-primary">Condividi una foto del tuo piatto</p>
+        <label for="image-upload" class="p-m rounded-md txt-white bg-primary">Carica Foto</label>
       </div>
 
       <div class="flex flex-col gap-s" id="crop-ui" style="display: none;">
@@ -70,14 +70,14 @@
         <div>
           <img alt="anteprima immagine da ritagliare" id="image-to-crop" src="#" style="display: block; max-width: 100%;">
         </div>
-        <button class="self-center p-s bg-primary text-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
+        <button class="self-center p-s bg-primary txt-white rounded-md" type="button" id="btn-confirm-crop">Conferma Ritaglio</button>
       </div>
       
       <img alt="immagine ritagliata pronta per essere pubblicata" src="#" id="final-preview" class="hidden" style="max-width: 100%;">
 
       <input class="hidden" type="file" id="image-upload" accept="image/jpeg, image/png, image/webp">
       <div class="flex items-center">
-        <label for="difficulty" class="flex-70 txt-ms text-primary">Difficoltà Ricetta</label>
+        <label for="difficulty" class="flex-70 txt-ms txt-primary">Difficoltà Ricetta</label>
         <select class="input-base txt-s p-m" name="difficulty" id="difficulty">
           <option value="facile">facile</option>
           <option value="medio">medio</option>
@@ -85,18 +85,18 @@
         </select>
       </div>
       <div class="flex items-center">
-        <label for="prep-time" class="txt-ms text-primary">Tempo di preparazione</label>
+        <label for="prep-time" class="txt-ms txt-primary">Tempo di preparazione</label>
         <div class="flex ml-auto items-center">
           <input style="width: 3rem;" class="input-base w-auto txt-s p-m" type="number" id="prep-time" name="prep-time" placeholder="60">
           <span class="txt-s">minuti</span>
         </div>
       </div>
-      <label for="search-ingr" class="txt-m text-primary">Aggiungi Ingredienti:</label>
+      <label for="search-ingr" class="txt-m txt-primary">Aggiungi Ingredienti:</label>
       <input class="input-base w-auto txt-s p-m" id="search-ingr" type="text" placeholder="Es: aglio, pomodoro, ecc...">
       <p class="txt-s">Non è necessario specificare il sale</p>
       <ul id="search-results" style="display: none; border: 1px solid #ccc;"></ul>
 
-      <p class="txt-ms text-primary">Ingredienti aggiunti:</p>
+      <p class="txt-ms txt-primary">Ingredienti aggiunti:</p>
       <ul id="ingredients-list"></ul>
       <div>
         <label for="recipe-description">Descrivi la preparazione della tua ricetta</label>
@@ -107,7 +107,7 @@
 
       <input type="hidden" name="cropped_image_data" id="cropped_image_data">
 
-      <button class="self-center txt-m p-m rounded-md text-white bg-accent mb-l" type="submit">Carica Ricetta</button>
+      <button class="self-center txt-m p-m rounded-md txt-white bg-accent mb-l" type="submit">Carica Ricetta</button>
     </form>
   </main>
 

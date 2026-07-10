@@ -14,7 +14,7 @@ if (logingForm) {
                 console.log("Autenticato con successo");
                 window.location.href = "/Cookit/pages/home.html"; 
             } else {
-                console.error("Errore di autenticazione:", data.messaggio);
+                alert("Credenziali non valide");
             }
     
         } catch (error) {

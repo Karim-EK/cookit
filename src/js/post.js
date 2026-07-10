@@ -1,5 +1,4 @@
 import { handleMainButtons } from "./homeButtons.js";
-
 const urlParams = new URLSearchParams(window.location.search);
 const idPost = urlParams.get("id");
 const container = document.getElementById("post-container");
@@ -21,7 +20,7 @@ try {
 }
 
 function renderPage() {
-  container.className = "post w-full";
+  container.className = "w-full post";
   const title = document.createElement("p");
   const deleteIconButton = document.createElement("button");
   deleteIconButton.id = "delete-btn"; 
@@ -46,10 +45,10 @@ function renderPage() {
   const userImg = document.createElement("img");
   userImg.className = "h-icon rounded-md object-cover mr-m";
   userImg.src = postData.data.immagine_profilo || "/Cookit/src/assets/default-avatar.png";
-  // TODO: Verifica checkers
-  userImg.alt = "";
+  userImg.alt = "immagine profilo";
   const username = document.createElement("p");
   username.innerText = postData.data.Username;
+  username.addEventListener("click", function() {location.href = `/Cookit/pages/profile.html?id=${postData.data.Utente_Id}`});
   const time = document.createElement("p");
   time.classList = "ml-auto"
   const safeDateString = postData.data.Data_Pubblicazione.replace(" ", "T");
@@ -67,12 +66,11 @@ function renderPage() {
   userInfo.appendChild(time);
 
   const dynamicContainer = document.createElement("div");
-  //TODO: dimensione minima
   dynamicContainer.className = "dynamic-container";
   const postImage = document.createElement("img");
   postImage.className = "h-post-img rounded-lg object-cover w-full";
   postImage.src = postData.data.immagine_ricetta || "/Cookit/src/assets/default-dish.png";
-  postImage.alt = ""; //TODO
+  postImage.alt = ""; 
   dynamicContainer.appendChild(postImage);
   container.appendChild(dynamicContainer);
 
@@ -118,7 +116,7 @@ function renderPage() {
 	</button>
 	<div class="flex flex-col items-center">
 	<p class="bold">Preparazione</p>
-	<button id="prep-btn" data-recipe-id="${postData.data.id_ricetta}" class="btn-icon">
+	<button data-btn-type="prep-btn" data-recipe-id="${postData.data.id_ricetta}" class="btn-icon">
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none"
 	stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
 
